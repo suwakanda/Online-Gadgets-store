@@ -11,7 +11,6 @@ if(isset($_SESSION['user_id'])){
 };
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -99,11 +98,6 @@ if(isset($_SESSION['user_id'])){
       <h3>laptop</h3>
    </a>
 
-   <a href="category.php?category=tv" class="swiper-slide slide">
-      <img src="images/icon-2.png" alt="">
-      <h3>tv</h3>
-   </a>
-
    <a href="category.php?category=camera" class="swiper-slide slide">
       <img src="images/icon-3.png" alt="">
       <h3>camera</h3>
@@ -112,16 +106,6 @@ if(isset($_SESSION['user_id'])){
    <a href="category.php?category=mouse" class="swiper-slide slide">
       <img src="images/icon-4.png" alt="">
       <h3>mouse</h3>
-   </a>
-
-   <a href="category.php?category=fridge" class="swiper-slide slide">
-      <img src="images/icon-5.png" alt="">
-      <h3>fridge</h3>
-   </a>
-
-   <a href="category.php?category=washing" class="swiper-slide slide">
-      <img src="images/icon-6.png" alt="">
-      <h3>washing machine</h3>
    </a>
 
    <a href="category.php?category=smartphone" class="swiper-slide slide">
@@ -136,13 +120,11 @@ if(isset($_SESSION['user_id'])){
 
    </div>
 
-   <div class="swiper-pagination"></div>
-
    </div>
 
 </section>
 
-<section class="home-products">
+<section class="latest-products">
 
    <h1 class="heading">latest products</h1>
 
@@ -185,14 +167,6 @@ if(isset($_SESSION['user_id'])){
    </div>
 
 </section>
-
-
-
-
-
-
-
-
 
 <?php include 'components/footer.php'; ?>
 

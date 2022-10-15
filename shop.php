@@ -22,6 +22,7 @@ include 'components/wishlist_cart.php';
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>shop</title>
    
+   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
@@ -33,19 +34,21 @@ include 'components/wishlist_cart.php';
    
 <?php include 'components/user_header.php'; ?>
 
-<section class="products">
+<section class="latest-products">
 
    <h1 class="heading">latest products</h1>
 
-   <div class="box-container">
+   <div class="swiper products-slider">
+
+   <div class="swiper-wrapper">
 
    <?php
-     $select_products = $conn->prepare("SELECT * FROM `products`"); 
+     $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 6"); 
      $select_products->execute();
      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
    ?>
-   <form action="" method="post" class="box">
+   <form action="" method="post" class="swiper-slide slide">
       <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
       <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
       <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
@@ -63,29 +66,119 @@ include 'components/wishlist_cart.php';
    <?php
       }
    }else{
-      echo '<p class="empty">no products found!</p>';
+      echo '<p class="empty">no products added yet!</p>';
    }
    ?>
+
+   </div>
+
+   <div class="swiper-pagination"></div>
+
+   </div>
+</section>
+
+
+<section class="category">
+
+   <h1 class="heading">shop by category</h1>
+
+   <div class="swiper category-slider">
+
+   <div class="swiper-wrapper">
+
+   <a href="category.php?category=laptop" class="swiper-slide slide">
+      <img src="images/icon-1.png" alt="">
+      <h3>laptop</h3>
+   </a>
+
+   <a href="category.php?category=camera" class="swiper-slide slide">
+      <img src="images/icon-3.png" alt="">
+      <h3>camera</h3>
+   </a>
+
+   <a href="category.php?category=mouse" class="swiper-slide slide">
+      <img src="images/icon-4.png" alt="">
+      <h3>mouse</h3>
+   </a>
+
+   <a href="category.php?category=smartphone" class="swiper-slide slide">
+      <img src="images/icon-7.png" alt="">
+      <h3>smartphone</h3>
+   </a>
+
+   <a href="category.php?category=watch" class="swiper-slide slide">
+      <img src="images/icon-8.png" alt="">
+      <h3>watch</h3>
+   </a>
+
+   </div>
 
    </div>
 
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
 <?php include 'components/footer.php'; ?>
 
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
 <script src="js/script.js"></script>
+
+<script>
+
+var swiper = new Swiper(".home-slider", {
+   loop:true,
+   spaceBetween: 20,
+   pagination: {
+      el: ".swiper-pagination",
+      clickable:true,
+    },
+});
+
+ var swiper = new Swiper(".category-slider", {
+   loop:true,
+   spaceBetween: 20,
+   pagination: {
+      el: ".swiper-pagination",
+      clickable:true,
+   },
+   breakpoints: {
+      0: {
+         slidesPerView: 2,
+       },
+      650: {
+        slidesPerView: 3,
+      },
+      768: {
+        slidesPerView: 4,
+      },
+      1024: {
+        slidesPerView: 5,
+      },
+   },
+});
+
+var swiper = new Swiper(".products-slider", {
+   loop:true,
+   spaceBetween: 20,
+   pagination: {
+      el: ".swiper-pagination",
+      clickable:true,
+   },
+   breakpoints: {
+      550: {
+        slidesPerView: 2,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+   },
+});
+
+</script>
 
 </body>
 </html>
