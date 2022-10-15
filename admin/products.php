@@ -40,6 +40,10 @@ if(isset($_POST['add_product'])){
    $category = $_POST['category'];
    $discount = $_POST['discount'];
 
+   if($discount != 0){$discount = filter_var($discount, FILTER_SANITIZE_STRING);}
+   else {$discount = NULL;}
+
+
    $select_products = $conn->prepare("SELECT * FROM `products` WHERE name = ?");
    $select_products->execute([$name]);
 

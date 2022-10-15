@@ -22,7 +22,9 @@ if(isset($_POST['update'])){
    $category = $_POST['category'];
    $category = filter_var($category, FILTER_SANITIZE_STRING);
    $discount = $_POST['discount'];
-   $discount = filter_var($discount, FILTER_SANITIZE_STRING);
+   
+   if($discount != 0){$discount = filter_var($discount, FILTER_SANITIZE_STRING);}
+   else {$discount = NULL;}
 
 
    $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? ,category = ? ,discount = ? WHERE id = ?");
