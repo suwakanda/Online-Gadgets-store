@@ -586,6 +586,16 @@ section{
    margin-right: auto;
 }
 
+.products .discount{
+   margin:2rem 0;
+   font-size: 2rem;
+   color:var(--light-color);
+}
+
+.products .discount span{
+   color:var(--red);
+}
+
 .form-container form{
    background-color: var(--white);
    padding:2rem;
@@ -806,6 +816,16 @@ section{
 }
 
 .shopping-cart .sub-total span{
+   color:var(--red);
+}
+
+.shopping-cart .discount{
+   margin:2rem 0;
+   font-size: 2rem;
+   color:var(--light-color);
+}
+
+.shopping-cart .discount span{
    color:var(--red);
 }
 

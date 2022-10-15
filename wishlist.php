@@ -54,6 +54,7 @@ if(isset($_GET['delete_all'])){
 
    <?php
       $grand_total = 0;
+      $total_discount = 0;
       $select_wishlist = $conn->prepare("SELECT * FROM `wishlist` WHERE user_id = ?");
       $select_wishlist->execute([$user_id]);
       if($select_wishlist->rowCount() > 0){
@@ -70,9 +71,18 @@ if(isset($_GET['delete_all'])){
       <img src="uploaded_img/<?= $fetch_wishlist['image']; ?>" alt="">
       <div class="name"><?= $fetch_wishlist['name']; ?></div>
       <div class="flex">
-         <div class="price">$<?= $fetch_wishlist['price']; ?>/-</div>
+      <div class="price">$<?= $fetch_wishlist['price']; ?>/
+         <?= $fetch_wishlist['discount']; ?>%</div>
          <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
       </div>
+
+      <?php 
+         $discountRate = $fetch_wishlist['discount']/100;
+      ?>
+      <div class="discount"> total discount : <span>$<?= $discount =  ($fetch_wishlist['price']* $discountRate) ; ?></span> </div>
+      <?php 
+      $total_discount += $discount;?>
+      
       <input type="submit" value="add to cart" class="btn" name="add_to_cart">
       <input type="submit" value="delete item" onclick="return confirm('delete this from wishlist?');" class="delete-btn" name="delete">
    </form>
@@ -85,7 +95,7 @@ if(isset($_GET['delete_all'])){
    </div>
 
    <div class="wishlist-total">
-      <p>grand total : <span>$<?= $grand_total; ?>/-</span></p>
+      <p>grand total : <span>$<?= $grand_total-$total_discount; ?></span></p>
       <a href="shop.php" class="option-btn">continue shopping</a>
       <a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>" onclick="return confirm('delete all from wishlist?');">delete all item</a>
    </div>
