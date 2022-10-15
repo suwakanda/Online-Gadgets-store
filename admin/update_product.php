@@ -127,9 +127,16 @@ if(isset($_POST['update'])){
             <img src="../uploaded_img/<?= $fetch_products['image_01']; ?>" alt="">
          </div>
          <div class="sub-image">
-            <img src="../uploaded_img/<?= $fetch_products['image_01']; ?>" alt="">
-            <img src="../uploaded_img/<?= $fetch_products['image_02']; ?>" alt="">
-            <img src="../uploaded_img/<?= $fetch_products['image_03']; ?>" alt="">
+            
+            <?php if (!empty($fetch_products['image_01'])){?>
+               <img src="../uploaded_img/<?= $fetch_products['image_01']; ?>" alt=""><?php } ?>
+
+               <?php if (!empty($fetch_products['image_02'])){?>
+               <img src="../uploaded_img/<?= $fetch_products['image_02']; ?>" alt=""><?php } ?>
+               
+               <?php if (!empty($fetch_products['image_03'])){?>
+               <img src="../uploaded_img/<?= $fetch_products['image_03']; ?>" alt=""> <?php } ?>
+            </div>
          </div>
       </div>
       <span>update name</span>
