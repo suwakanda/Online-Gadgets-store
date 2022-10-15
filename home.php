@@ -70,7 +70,7 @@ if(isset($_SESSION['user_id'])){
          </div>
          <div class="content">
             <span>upto 50% off</span>
-            <h3>latest headsets</h3>
+            <h3>latest camera</h3>
             <a href="shop.php" class="btn">shop now</a>
          </div>
       </div>
