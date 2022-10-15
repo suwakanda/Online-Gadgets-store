@@ -10,7 +10,7 @@ if(isset($_SESSION['user_id'])){
    $user_id = '';
 };
 
-
+include 'components/wishlist_cart.php';
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +47,7 @@ if(isset($_SESSION['user_id'])){
             <img src="images/home-img-1.png" alt="">
          </div>
          <div class="content">
-            <span>upto 50% off</span>
+            <span>upto 10% off</span>
             <h3>latest smartphones</h3>
             <a href="shop.php" class="btn">shop now</a>
          </div>
@@ -58,7 +58,7 @@ if(isset($_SESSION['user_id'])){
             <img src="images/home-img-2.png" alt="">
          </div>
          <div class="content">
-            <span>upto 50% off</span>
+            <span>upto 10% off</span>
             <h3>latest watches</h3>
             <a href="shop.php" class="btn">shop now</a>
          </div>
@@ -69,7 +69,7 @@ if(isset($_SESSION['user_id'])){
             <img src="images/home-img-3.png" alt="">
          </div>
          <div class="content">
-            <span>upto 50% off</span>
+            <span>upto 10% off</span>
             <h3>latest camera</h3>
             <a href="shop.php" class="btn">shop now</a>
          </div>
