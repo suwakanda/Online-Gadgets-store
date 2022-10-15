@@ -19,12 +19,14 @@ if(isset($_POST['update'])){
    $price = filter_var($price, FILTER_SANITIZE_STRING);
    $details = $_POST['details'];
    $details = filter_var($details, FILTER_SANITIZE_STRING);
-
    $category = $_POST['category'];
+   $category = filter_var($category, FILTER_SANITIZE_STRING);
+   $discount = $_POST['discount'];
+   $discount = filter_var($discount, FILTER_SANITIZE_STRING);
 
 
-   $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? ,category = ? WHERE id = ?");
-   $update_product->execute([$name, $price, $details, $category, $pid]);
+   $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? ,category = ? ,discount = ? WHERE id = ?");
+   $update_product->execute([$name, $price, $details, $category, $discount, $pid]);
 
    $message[] = 'product updated successfully!';
 
@@ -152,10 +154,15 @@ if(isset($_POST['update'])){
       <span>update image 03</span>
       <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
 
+      
+         <span>discount rate </span>
+         <input type="number" name="discount"  class="box" min="0" max="9999999999" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['discount']; ?>">
+      
+
       <div class="inputBox">
-         <span>CATEGORY :</span>
-            <select name="category" id="category">
-            <option selected disabled><?= $fetch_products['category']; ?></option>
+         <span>CATEGORY (require):</span>
+            <select name="category" id="category" class="box" required >
+            <option selected disabled value="<?php  $fetch_products['category']; ?>"><?= $fetch_products['category']; ?></option>
             <option value="laptop">laptop</option>
             <option value="camera">camera</option>
             <option value="mouse">mouse</option>

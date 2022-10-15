@@ -38,6 +38,7 @@ if(isset($_POST['add_product'])){
    $image_folder_03 = '../uploaded_img/'.$image_03;
 
    $category = $_POST['category'];
+   $discount = $_POST['discount'];
 
    $select_products = $conn->prepare("SELECT * FROM `products` WHERE name = ?");
    $select_products->execute([$name]);
@@ -46,8 +47,8 @@ if(isset($_POST['add_product'])){
       $message[] = 'product name already exist!';
    }else{
 
-      $insert_products = $conn->prepare("INSERT INTO `products`(name, details, price, image_01, image_02, image_03,category) VALUES(?,?,?,?,?,?,?)");
-      $insert_products->execute([$name, $details, $price, $image_01, $image_02, $image_03, $category]);
+      $insert_products = $conn->prepare("INSERT INTO `products`(name, details, price, image_01, image_02, image_03,category,discount) VALUES(?,?,?,?,?,?,?,?)");
+      $insert_products->execute([$name, $details, $price, $image_01, $image_02, $image_03, $category, $discount]);
 
       if($insert_products){
          if($image_size_01 > 2000000 OR $image_size_02 > 2000000 OR $image_size_03 > 2000000){
@@ -135,8 +136,13 @@ if(isset($_GET['delete'])){
          </div>
 
          <div class="inputBox">
-         <span>CATEGORY :</span>
-            <select name="category" id="category">
+            <span>discount rate </span>
+            <input type="number" min="0" class="box"  max="100" placeholder="enter discount rate %" onkeypress="if(this.value.length == 10) return false;" name="discount">
+         </div>
+
+         <div class="inputBox">
+         <span>category:</span>
+            <select name="category" class="box" required>
             <option value="laptop">laptop</option>
             <option value="camera">camera</option>
             <option value="mouse">mouse</option>
@@ -145,8 +151,6 @@ if(isset($_GET['delete'])){
             </select>
          </div>
 
-
-         
 
       </div>
 
@@ -172,7 +176,16 @@ if(isset($_GET['delete'])){
    <div class="box">
       <img src="../uploaded_img/<?= $fetch_products['image_01']; ?>" alt="">
       <div class="name"><?= $fetch_products['name']; ?></div>
-      <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
+
+      <div class="price">$<?= $fetch_products['price']; ?> 
+         <?php if(isset($fetch_products['discount'])){?>
+         /
+         <?= $fetch_products['discount']; ?>%<?php } ?></div>
+
+         <?php $discount = $fetch_products['discount']/100 ?>
+
+         <div class="price"><?php if(isset($fetch_products['discount'])){?>= $<?= $fetch_products['price']-($discount*$fetch_products['price']); ?>%<?php } ?></div>
+
       <div class="details"><span><?= $fetch_products['details']; ?></span></div>
       <div class="flex-btn">
          <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">update</a>
