@@ -20,8 +20,11 @@ if(isset($_POST['update'])){
    $details = $_POST['details'];
    $details = filter_var($details, FILTER_SANITIZE_STRING);
 
-   $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? WHERE id = ?");
-   $update_product->execute([$name, $price, $details, $pid]);
+   $category = $_POST['category'];
+
+
+   $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? ,category = ? WHERE id = ?");
+   $update_product->execute([$name, $price, $details, $category, $pid]);
 
    $message[] = 'product updated successfully!';
 
@@ -141,6 +144,18 @@ if(isset($_POST['update'])){
       <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
       <span>update image 03</span>
       <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
+
+      <div class="inputBox">
+         <span>CATEGORY :</span>
+            <select name="category" id="category">
+            <option selected disabled><?= $fetch_products['category']; ?></option>
+            <option value="laptop">laptop</option>
+            <option value="camera">camera</option>
+            <option value="mouse">mouse</option>
+            <option value="smartphone">smartphone</option>
+            <option value="watch">watch</option>
+            </select>
+      </div>
       
       <div class="flex-btn">
          <input type="submit" name="update" class="btn" value="update">
