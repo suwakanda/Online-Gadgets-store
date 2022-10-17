@@ -49,6 +49,7 @@ include 'components/wishlist_cart.php';
       <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
       <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
       <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
+      <input type="hidden" name="discount" value="<?= $fetch_product['discount']; ?>">
       <div class="row">
          <div class="image-container">
             <div class="main-image">
