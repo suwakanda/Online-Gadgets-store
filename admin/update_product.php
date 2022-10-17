@@ -30,6 +30,12 @@ if(isset($_POST['update'])){
    $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? ,category = ? ,discount = ? WHERE id = ?");
    $update_product->execute([$name, $price, $details, $category, $discount, $pid]);
 
+   $update_wishlist = $conn->prepare("UPDATE `wishlist` SET name = ?, price = ?, discount = ? WHERE pid LIKE '%{$pid}%'");
+   $update_wishlist->execute([$name, $price,  $discount]);
+
+   $update_cart = $conn->prepare("UPDATE `cart` SET name = ?, price = ?, discount = ? WHERE pid LIKE '%{$pid}%'");
+   $update_cart->execute([$name, $price,  $discount]);
+
    $message[] = 'product updated successfully!';
 
    $old_image_01 = $_POST['old_image_01'];
@@ -45,6 +51,13 @@ if(isset($_POST['update'])){
       }else{
          $update_image_01 = $conn->prepare("UPDATE `products` SET image_01 = ? WHERE id = ?");
          $update_image_01->execute([$image_01, $pid]);
+
+         $update_wishlist_image = $conn->prepare("UPDATE `wishlist` SET image = ? WHERE pid LIKE '%{$pid}%'");
+         $update_wishlist_image->execute([$image_01]);
+
+         $update_cart_image = $conn->prepare("UPDATE `cart` SET image = ? WHERE pid LIKE '%{$pid}%'");
+         $update_cart_image->execute([$image_01]);
+
          move_uploaded_file($image_tmp_name_01, $image_folder_01);
          unlink('../uploaded_img/'.$old_image_01);
          $message[] = 'image 01 updated successfully!';

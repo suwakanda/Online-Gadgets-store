@@ -496,6 +496,18 @@ section{
    line-height: 2;
 }  
 
+
+.quick-view .discount{
+   margin:2rem 0;
+   font-size: 2rem;
+   color:var(--light-color);
+}
+
+.quick-view .discount span{
+   color:var(--red);
+}
+
+
 .products .box-container{
    display: grid;
    grid-template-columns: repeat(auto-fit, 33rem);

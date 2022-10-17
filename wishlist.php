@@ -67,6 +67,7 @@ if(isset($_GET['delete_all'])){
       <input type="hidden" name="name" value="<?= $fetch_wishlist['name']; ?>">
       <input type="hidden" name="price" value="<?= $fetch_wishlist['price']; ?>">
       <input type="hidden" name="image" value="<?= $fetch_wishlist['image']; ?>">
+      <input type="hidden" name="discount" value="<?= $fetch_wishlist['discount']; ?>">
       <a href="quick_view.php?pid=<?= $fetch_wishlist['pid']; ?>" class="fas fa-eye"></a>
       <img src="uploaded_img/<?= $fetch_wishlist['image']; ?>" alt="">
       <div class="name"><?= $fetch_wishlist['name']; ?></div>
@@ -79,7 +80,7 @@ if(isset($_GET['delete_all'])){
       <?php 
          $discountRate = $fetch_wishlist['discount']/100;
       ?>
-      <div class="discount"> total discount : <span>$<?= $discount =  ($fetch_wishlist['price']* $discountRate) ; ?></span> </div>
+      <div class="discount">  discount : <span>$<?= $discount =  ($fetch_wishlist['price']* $discountRate) ; ?></span> </div>
       <?php 
       $total_discount += $discount;?>
       

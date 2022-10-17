@@ -83,7 +83,7 @@ if(isset($_POST['update_qty'])){
          $discountRate = $fetch_cart['discount']/100;
       ?>
 
-      <div class="discount"> total discount : <span>$<?= $discount =  (($fetch_cart['price']* $discountRate) * $fetch_cart['quantity']); ?></span> </div>
+      <div class="discount"> total discount : <span>$<?= (($fetch_cart['price']* $discountRate) * $fetch_cart['quantity']); ?></span> </div>
       <div class="sub-total"> sub total : <span>$<?= $sub_total =  ($fetch_cart['price']-($fetch_cart['price']* $discountRate)) * $fetch_cart['quantity']; ?></span> </div>
       <input type="submit" value="delete item" onclick="return confirm('delete this from cart?');" class="delete-btn" name="delete">
    </form>

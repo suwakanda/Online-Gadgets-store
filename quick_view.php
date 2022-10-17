@@ -70,9 +70,23 @@ include 'components/wishlist_cart.php';
          <div class="content">
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
-               <div class="price"><span>$</span><?= $fetch_product['price']; ?><span>/-</span></div>
-               <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+
+
+            <div class="price">$<?= $fetch_product['price']; ?>
+         
+         
+      <?php 
+        
+      ?>
+      <?php if(isset($fetch_product['discount'])){ $discountRate = $fetch_product['discount']/100;?>
+         /
+      <?= $fetch_product['discount']; ?>%</div>
+      <div class="discount"> discount : <span>$<?= $discount =  ($fetch_product['price']* $discountRate) ; }?></span> </div>
+            <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+ 
             </div>
+
+            
             <div class="details"><?= $fetch_product['details']; ?></div>
             <div class="flex-btn">
                <input type="submit" value="add to cart" class="btn" name="add_to_cart">

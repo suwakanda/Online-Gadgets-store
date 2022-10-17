@@ -73,17 +73,23 @@ if(isset($_POST['order'])){
 
       <div class="display-orders">
       <?php
+         $total=0;
          $grand_total = 0;
+         $discount_total = 0;
          $cart_items[] = '';
          $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
          $select_cart->execute([$user_id]);
          if($select_cart->rowCount() > 0){
             while($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)){
+               $discountRate = $fetch_cart['discount']/100;
                $cart_items[] = $fetch_cart['name'].' ('.$fetch_cart['price'].' x '. $fetch_cart['quantity'].') - ';
                $total_products = implode($cart_items);
-               $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
+               $total += ($fetch_cart['price'] * $fetch_cart['quantity']);
+               $grand_total += (($fetch_cart['price']-($fetch_cart['price']* $discountRate)) * $fetch_cart['quantity']);
+               $discount_total += (($fetch_cart['price']* $discountRate) * $fetch_cart['quantity']);
       ?>
-         <p> <?= $fetch_cart['name']; ?> <span>(<?= '$'.$fetch_cart['price'].'/- x '. $fetch_cart['quantity']; ?>)</span> </p>
+         <p> <?= $fetch_cart['name']; ?> <span>(<?= '$'.($fetch_cart['price']).' x '. $fetch_cart['quantity']; ?>)- <?=$fetch_cart['discount'];?>% =(<?= ($fetch_cart['price']-($fetch_cart['price']* $discountRate)) ?>)</span> </p>
+         
       <?php
             }
          }else{
@@ -92,7 +98,8 @@ if(isset($_POST['order'])){
       ?>
          <input type="hidden" name="total_products" value="<?= $total_products; ?>">
          <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">
-         <div class="grand-total">grand total : <span>$<?= $grand_total; ?>/-</span></div>
+         
+         <div class="grand-total">total : <span>$<?= $total; ?></span> discount : <span>$<?= $discount_total; ?></span> grand total : <span>$<?= $grand_total; ?></span></div>
       </div>
 
       <h3>place your orders</h3>
