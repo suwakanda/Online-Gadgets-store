@@ -209,7 +209,7 @@ if(isset($_GET['delete'])){
                     
                     <td><?php echo $fetch_products['category']; ?></td>
                     <td><?php echo $fetch_products['price']; ?></td>
-                    <td><?php echo $fetch_products['discount']; ?></td>
+                    <td><?php echo $fetch_products['discount']; ?>%</td>
                     <td>
                     
                      <a class="btn btn-info btn-sm " href="update_product.php?update=<?= $fetch_products['id']; ?>">Edit</a>
