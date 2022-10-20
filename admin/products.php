@@ -98,10 +98,17 @@ if(isset($_GET['delete'])){
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>products</title>
-
+   
+ 
+   
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <link rel="stylesheet" href="../css/admin_style.css">
+   
+   <link rel="stylesheet" href="assets/dataTables.bootstrap4.min.css">
+   <link rel="stylesheet" href="assets/bootstrap.min.css">
+    
+   
 
 </head>
 <body>
@@ -204,17 +211,86 @@ if(isset($_GET['delete'])){
    ?>
    
    </div>
+   </div>
+</section>
 
+<section>
+<div class="card ">
+
+        <div class="card-header">
+        <div class="card-body pr-2 pl-2">
+
+          <table id="example" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Product id</th>
+                      <th  class="text-center">Name</th>
+                      <th  class="text-center">Category</th>
+                      <th  class="text-center">Price</th> 
+                      <th  class="text-center">Discount</th> 
+                      <th  width='25%' class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                  
+
+                  $select_products= $conn->prepare("SELECT * FROM `products` ORDER BY id DESC");
+                  $select_products->execute();
+                  if($select_products->rowCount() > 0){
+                     while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
+            ?>
+                  
+                  <tr class="text-center">
+                  
+                    <td><?php echo $fetch_products['id'];?></td>
+                    <td><a href="updateproduct.php?update=<?php echo $fetch_products['id'];?>"><?php echo $fetch_products['name'];?></a></td>
+                    
+                    <td><?php echo $fetch_products['category']; ?></td>
+                    <td><?php echo $fetch_products['price']; ?></td>
+                    <td><?php echo $fetch_products['discount']; ?></td>
+                    <td>
+                    
+                     <a class="btn btn-info btn-sm " href="update_product.php?update=<?= $fetch_products['id']; ?>">Edit</a>
+                     <a onclick="return confirm('Are you sure To Delete ?')" class="btn btn-danger btn-sm " href="products.php?delete=<?= $fetch_products['id']; ?>">Remove</a>
+                    </td>
+                     
+                  
+                  <?php }?>
+                  <?php }?>
+                  
+                  
+                  </tr>
+                  </tbody>
+
+                  
+          </table>
+        </div>
+        </div>
+</div>
 </section>
 
 
 
-
-
-
-
-
 <script src="../js/admin_script.js"></script>
+ <!-- Jquery script -->
+ <script src="assets/jquery.min.js"></script>
+  <script src="assets/bootstrap.min.js"></script>
+  <script src="assets/jquery.dataTables.min.js"></script>
+  <script src="assets/dataTables.bootstrap4.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          $("#flash-msg").delay(7000).fadeOut("slow");
+      });
+
+      $(document).ready(function() {
+          $('#example').DataTable();
+          
+      } );
+      
+      
+  </script>
+
    
 </body>
 </html>
