@@ -62,7 +62,7 @@ section{
    text-transform: uppercase;
 }
 
-.btn,
+.normal-btn,
 .delete-btn,
 .option-btn{
    display: block;
@@ -77,13 +77,13 @@ section{
    text-align: center;
 }
 
-.btn:hover,
+.normal-btn:hover,
 .delete-btn:hover,
 .option-btn:hover{
    background-color: var(--black);
 }
 
-.btn{
+.normal-btn{
    background-color: var(--main-color);
 }
 
@@ -339,6 +339,11 @@ section{
 .add-products form textarea{
    height: 5.4rem;
    resize: none;
+   
+}
+.table-product {
+   font-size: 1.3rem;
+   
 }
 
 .show-products .box-container{

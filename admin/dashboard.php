@@ -50,7 +50,7 @@ if(!isset($admin_id)){
          ?>
          <h3><span>RM</span><?= $total_pendings; ?><span>/-</span></h3>
          <p>total pendings</p>
-         <a href="placed_orders.php" class="btn">see orders</a>
+         <a href="placed_orders.php" class="normal-btn">see orders</a>
       </div>
 
       <div class="box">
@@ -66,7 +66,7 @@ if(!isset($admin_id)){
          ?>
          <h3><span>RM</span><?= $total_completes; ?><span>/-</span></h3>
          <p>completed orders</p>
-         <a href="placed_orders.php" class="btn">see orders</a>
+         <a href="placed_orders.php" class="normal-btn">see orders</a>
       </div>
 
       
@@ -79,7 +79,7 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_products; ?></h3>
          <p>products added</p>
-         <a href="products.php" class="btn">see products</a>
+         <a href="products.php" class="normal-btn">see products</a>
       </div>
 
       <div class="box">
@@ -90,7 +90,7 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_messages; ?></h3>
          <p>new messages</p>
-         <a href="messages.php" class="btn">see messages</a>
+         <a href="messages.php" class="normal-btn">see messages</a>
       </div>
 
       <div class="box">
@@ -101,7 +101,7 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_users; ?></h3>
          <p>normal users</p>
-         <a href="users_accounts.php" class="btn">see users</a>
+         <a href="users_accounts.php" class="normal-btn">see users</a>
       </div>
 
       <div class="box">
@@ -112,7 +112,7 @@ if(!isset($admin_id)){
          ?>
          <h3><?= $number_of_admins; ?></h3>
          <p>admin users</p>
-         <a href="admin_accounts.php" class="btn">see admins</a>
+         <a href="admin_accounts.php" class="normal-btn">see admins</a>
       </div>
 
       

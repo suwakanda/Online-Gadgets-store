@@ -167,55 +167,16 @@ if(isset($_GET['delete'])){
 
       
       
-      <input type="submit" value="add product" class="btn" name="add_product">
+      <input type="submit" value="add product" class="normal-btn" name="add_product">
    </form>
 
 </section>
 
-<section class="show-products">
 
-   <h1 class="heading">products added</h1>
 
-   <div class="box-container">
-
-   <?php
-      $select_products = $conn->prepare("SELECT * FROM `products`");
-      $select_products->execute();
-      if($select_products->rowCount() > 0){
-         while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 
-   ?>
-   <div class="box">
-      <img src="../uploaded_img/<?= $fetch_products['image_01']; ?>" alt="">
-      <div class="name"><?= $fetch_products['name']; ?></div>
-
-      <div class="price">RM<?= $fetch_products['price']; ?> 
-         <?php if(isset($fetch_products['discount'])){?>
-         /
-         <?= $fetch_products['discount']; ?>%<?php } ?></div>
-
-         <?php $discount = $fetch_products['discount']/100 ?>
-
-         <div class="price"><?php if(isset($fetch_products['discount'])){?>= RM<?= $fetch_products['price']-($discount*$fetch_products['price']); ?><?php } ?></div>
-
-      <div class="details"><span><?= $fetch_products['details']; ?></span></div>
-      <div class="flex-btn">
-         <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">update</a>
-         <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
-      </div>
-   </div>
-   <?php
-         }
-      }else{
-         echo '<p class="empty">no products added yet!</p>';
-      }
-   ?>
-   
-   </div>
-   </div>
-</section>
-
-<section>
-<div class="card ">
+<section class="table-product" >
+<h1 class="heading">products added</h1>
+<div class="card " style="width: 100%;">
 
         <div class="card-header">
         <div class="card-body pr-2 pl-2">
@@ -235,7 +196,7 @@ if(isset($_GET['delete'])){
                   <?php
                   
 
-                  $select_products= $conn->prepare("SELECT * FROM `products` ORDER BY id DESC");
+                  $select_products= $conn->prepare("SELECT * FROM `products` ORDER BY id ");
                   $select_products->execute();
                   if($select_products->rowCount() > 0){
                      while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
@@ -244,7 +205,7 @@ if(isset($_GET['delete'])){
                   <tr class="text-center">
                   
                     <td><?php echo $fetch_products['id'];?></td>
-                    <td><a href="updateproduct.php?update=<?php echo $fetch_products['id'];?>"><?php echo $fetch_products['name'];?></a></td>
+                    <td><a href="update_product.php?update=<?php echo $fetch_products['id'];?>"><?php echo $fetch_products['name'];?></a></td>
                     
                     <td><?php echo $fetch_products['category']; ?></td>
                     <td><?php echo $fetch_products['price']; ?></td>
