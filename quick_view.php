@@ -81,7 +81,7 @@ include 'components/wishlist_cart.php';
       <?php if(isset($fetch_product['discount'])){ $discountRate = $fetch_product['discount']/100;?>
          /
       <?= $fetch_product['discount']; ?>%</div>
-      <div class="discount"> discount : <span>$<?= $discount =  ($fetch_product['price']* $discountRate) ; }?></span> </div>
+      <div class="discount"> discount : <span>RM<?= $discount =  ($fetch_product['price']* $discountRate) ; }?></span> </div>
             <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
  
             </div>

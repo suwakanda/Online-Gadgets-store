@@ -137,6 +137,7 @@ include 'components/wishlist_cart.php';
      $select_products->execute();
      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
+         $discountRate = $fetch_product['discount']/100;
    ?>
    <form action="" method="post" class="swiper-slide slide">
       <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
@@ -150,10 +151,10 @@ include 'components/wishlist_cart.php';
       <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
       <div class="name"><?= $fetch_product['name']; ?></div>
       <div class="flex">
-         <div class="price">$<?= $fetch_product['price']; ?> 
+         <div class="price">RM<?= $fetch_product['price']-($fetch_product['price']*$discountRate); ?> 
          <?php if(isset($fetch_product['discount'])){?>
          /
-         <?= $fetch_product['discount']; ?>%<?php } ?></div>
+         <?= $fetch_product['discount']; ?>% off<?php } ?></div>
          
 
 

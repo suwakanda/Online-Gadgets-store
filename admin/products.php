@@ -181,14 +181,14 @@ if(isset($_GET['delete'])){
       <img src="../uploaded_img/<?= $fetch_products['image_01']; ?>" alt="">
       <div class="name"><?= $fetch_products['name']; ?></div>
 
-      <div class="price">$<?= $fetch_products['price']; ?> 
+      <div class="price">RM<?= $fetch_products['price']; ?> 
          <?php if(isset($fetch_products['discount'])){?>
          /
          <?= $fetch_products['discount']; ?>%<?php } ?></div>
 
          <?php $discount = $fetch_products['discount']/100 ?>
 
-         <div class="price"><?php if(isset($fetch_products['discount'])){?>= $<?= $fetch_products['price']-($discount*$fetch_products['price']); ?>%<?php } ?></div>
+         <div class="price"><?php if(isset($fetch_products['discount'])){?>= RM<?= $fetch_products['price']-($discount*$fetch_products['price']); ?><?php } ?></div>
 
       <div class="details"><span><?= $fetch_products['details']; ?></span></div>
       <div class="flex-btn">
