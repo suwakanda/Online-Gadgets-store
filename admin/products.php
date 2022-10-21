@@ -39,6 +39,8 @@ if(isset($_POST['add_product'])){
 
    $category = $_POST['category'];
    $discount = $_POST['discount'];
+   $stock = $_POST['stock'];
+   $isActive = $_POST['status'];
 
    if($discount != 0){$discount = filter_var($discount, FILTER_SANITIZE_STRING);}
    else {$discount = NULL;}
@@ -51,8 +53,8 @@ if(isset($_POST['add_product'])){
       $message[] = 'product name already exist!';
    }else{
 
-      $insert_products = $conn->prepare("INSERT INTO `products`(name, details, price, image_01, image_02, image_03,category,discount) VALUES(?,?,?,?,?,?,?,?)");
-      $insert_products->execute([$name, $details, $price, $image_01, $image_02, $image_03, $category, $discount]);
+      $insert_products = $conn->prepare("INSERT INTO `products`(name, details, price, image_01, image_02, image_03,category,discount,stock,isActive) VALUES(?,?,?,?,?,?,?,?,?,?)");
+      $insert_products->execute([$name, $details, $price, $image_01, $image_02, $image_03, $category, $discount,$stock,$isActive]);
 
       if($insert_products){
          if($image_size_01 > 2000000 OR $image_size_02 > 2000000 OR $image_size_03 > 2000000){
@@ -171,6 +173,11 @@ if(isset($_GET['deactive'])){
          </div>
 
          <div class="inputBox">
+            <span>stock </span>
+            <input type="number" min="0" class="box"  max="100" placeholder="enter number of stock" onkeypress="if(this.value.length == 10) return false;" name="stock">
+         </div>
+
+         <div class="inputBox">
          <span>category:</span>
             <select name="category" class="box" required>
             <option value="laptop">laptop</option>
@@ -178,6 +185,14 @@ if(isset($_GET['deactive'])){
             <option value="mouse">mouse</option>
             <option value="smartphone">smartphone</option>
             <option value="watch">watch</option>
+            </select>
+         </div>
+
+         <div class="inputBox">
+         <span>Status:</span>
+            <select name="status" class="box" required>
+            <option selected value="0">Active</option>
+            <option value="1">Disable</option>
             </select>
          </div>
 
