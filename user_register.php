@@ -16,6 +16,8 @@ if(isset($_POST['submit'])){
    $name = filter_var($name, FILTER_SANITIZE_STRING);
    $email = $_POST['email'];
    $email = filter_var($email, FILTER_SANITIZE_STRING);
+   $phone = $_POST['phone'];
+   $phone = filter_var($phone, FILTER_SANITIZE_STRING);
    $pass = sha1($_POST['pass']);
    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
    $cpass = sha1($_POST['cpass']);
@@ -27,6 +29,8 @@ if(isset($_POST['submit'])){
 
    if($select_user->rowCount() > 0){
       $message[] = 'email already exists!';
+   }elseif(!preg_match('/^[0-9]{10}+$/', $phone)) {
+      $message[] = 'Invalid Phone Number';
    }else{
       if($pass != $cpass){
          $message[] = 'confirm password not matched!';
@@ -66,6 +70,7 @@ if(isset($_POST['submit'])){
       <h3>register now</h3>
       <input type="text" name="name" required placeholder="enter your username" maxlength="20"  class="box">
       <input type="email" name="email" required placeholder="enter your email" maxlength="50"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="text" name="phone" required placeholder="enter your phone number" maxlength="50"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="pass" required placeholder="enter your password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="cpass" required placeholder="confirm your password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="register now" class="btn" name="submit">
