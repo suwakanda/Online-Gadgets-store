@@ -74,10 +74,7 @@ include 'components/wishlist_cart.php';
 
             <div class="price">$<?= $fetch_product['price']; ?>
          
-         
-      <?php 
-        
-      ?>
+   
       <?php if(isset($fetch_product['discount'])){ $discountRate = $fetch_product['discount']/100;?>
          /
       <?= $fetch_product['discount']; ?>%</div>
