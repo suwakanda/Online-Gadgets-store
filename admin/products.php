@@ -89,6 +89,25 @@ if(isset($_GET['delete'])){
 }
 
 
+if(isset($_GET['active'])){
+
+   $isActive_id = $_GET['active'];
+   $update_isActive = $conn->prepare("UPDATE `products` SET isActive = ? WHERE id = ?");
+   $update_isActive->execute([0, $isActive_id]);
+   
+   header('location:products.php');
+}
+
+if(isset($_GET['deactive'])){
+
+   $isActive_id = $_GET['deactive'];
+   $update_isActive = $conn->prepare("UPDATE `products` SET isActive = ? WHERE id = ?");
+   $update_isActive->execute([1, $isActive_id]);
+   
+   header('location:products.php');
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -187,8 +206,10 @@ if(isset($_GET['delete'])){
                       <th class="text-center">Product id</th>
                       <th  class="text-center">Name</th>
                       <th  class="text-center">Category</th>
-                      <th  class="text-center">Price</th> 
+                      <th  class="text-center">Net Price</th> 
                       <th  class="text-center">Discount</th> 
+                      <th  class="text-center">Stock</th> 
+                      <th  class="text-center">Status</th> 
                       <th  width='25%' class="text-center">Action</th>
                     </tr>
                   </thead>
@@ -210,10 +231,28 @@ if(isset($_GET['delete'])){
                     <td><?php echo $fetch_products['category']; ?></td>
                     <td><?php echo $fetch_products['price']; ?></td>
                     <td><?php echo $fetch_products['discount']; ?>%</td>
+                    <td><?php echo $fetch_products['stock']; ?></td>
+                    <td>
+                          <?php if ($fetch_products['isActive'] == '0') { ?>
+                          <span class="badge badge-lg badge-info text-white">Active</span>
+                        <?php }else{ ?>
+                    <span class="badge badge-lg badge-danger text-white">Deactive</span>
+                        <?php } ?>
+
+                     </td>
                     <td>
                     
                      <a class="btn btn-info btn-sm " href="update_product.php?update=<?= $fetch_products['id']; ?>">Edit</a>
                      <a onclick="return confirm('Are you sure To Delete ?')" class="btn btn-danger btn-sm " href="products.php?delete=<?= $fetch_products['id']; ?>">Remove</a>
+                     <?php if ($fetch_products['isActive'] == '0') {  ?>
+                               <a onclick="return confirm('Are you sure To Deactive ?')" class="btn btn-warning
+
+                                btn-sm " href="?deactive=<?php echo $fetch_products['id'];?>">Disable</a>
+                             <?php } elseif($fetch_products['isActive'] == '1'){?>
+                               <a onclick="return confirm('Are you sure To Active ?')" class="btn btn-secondary
+      
+                                btn-sm " href="?active=<?php echo $fetch_products['id'];?>">Active</a>
+                             <?php } ?>
                     </td>
                      
                   
