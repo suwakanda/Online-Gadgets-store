@@ -173,8 +173,8 @@ if(isset($_GET['deactive'])){
          </div>
 
          <div class="inputBox">
-            <span>stock </span>
-            <input type="number" min="0" class="box"  max="100" placeholder="enter number of stock" onkeypress="if(this.value.length == 10) return false;" name="stock">
+            <span>stock (required)</span>
+            <input type="number" min="0" class="box"  max="100" placeholder="enter number of stock" onkeypress="if(this.value.length == 10) return false;" name="stock" required>
          </div>
 
          <div class="inputBox">
@@ -245,7 +245,7 @@ if(isset($_GET['deactive'])){
                     
                     <td><?php echo $fetch_products['category']; ?></td>
                     <td><?php echo $fetch_products['price']; ?></td>
-                    <td><?php echo $fetch_products['discount']; ?>%</td>
+                    <td><?php if(isset($fetch_products['discount'])){echo $fetch_products['discount']; ?>%<?php }else{echo 'NO';} ?></td>
                     <td><?php echo $fetch_products['stock']; ?></td>
                     <td>
                           <?php if ($fetch_products['isActive'] == '0') { ?>

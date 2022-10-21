@@ -103,21 +103,10 @@ if(isset($_POST['reset_password'])){
       <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="update now" class="btn" name="submit">
-      <input type="submit" value="Change Password" class="btn" name="reset_password">
+      <input type="submit" value="Change Password" class="delete-btn" name="reset_password">
    </form>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
 
 
 <?php include 'components/footer.php'; ?>
