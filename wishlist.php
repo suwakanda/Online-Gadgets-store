@@ -74,7 +74,7 @@ if(isset($_GET['delete_all'])){
       <div class="flex">
       <div class="price">RM<?= $fetch_wishlist['price']; ?>/
          <?= $fetch_wishlist['discount']; ?>%</div>
-         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+         <input type="number" name="qty" class="qty" min="1" max="<?= $fetch_wishlist['stock']; ?>" onkeypress="if(this.value.length == 2) return false;" value="1">
       </div>
 
       <?php 

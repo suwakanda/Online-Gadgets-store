@@ -61,7 +61,7 @@ include 'components/wishlist_cart.php';
          <?php if(isset($fetch_product['discount'])){?>
          /
          <?= $fetch_product['discount']; ?>%<?php } ?></div>
-         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+         <input type="number" name="qty" class="qty" min="1" max="<?= $fetch_product['stock']; ?>" onkeypress="if(this.value.length == 2) return false;" value="1">
       </div>
       <input type="submit" value="add to cart" class="btn" name="add_to_cart">
    </form>
