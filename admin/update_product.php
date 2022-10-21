@@ -22,13 +22,16 @@ if(isset($_POST['update'])){
    $category = $_POST['category'];
    $category = filter_var($category, FILTER_SANITIZE_STRING);
    $discount = $_POST['discount'];
+   $stock = $_POST['stock'];
+   $stock = filter_var($stock, FILTER_SANITIZE_STRING);
+
    
    if($discount != 0){$discount = filter_var($discount, FILTER_SANITIZE_STRING);}
    else {$discount = NULL;}
 
 
-   $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? ,category = ? ,discount = ? WHERE id = ?");
-   $update_product->execute([$name, $price, $details, $category, $discount, $pid]);
+   $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?, details = ? ,category = ? ,discount = ?,stock = ? WHERE id = ?");
+   $update_product->execute([$name, $price, $details, $category, $discount,$stock, $pid]);
 
    $update_wishlist = $conn->prepare("UPDATE `wishlist` SET name = ?, price = ?, discount = ? WHERE pid LIKE '%{$pid}%'");
    $update_wishlist->execute([$name, $price,  $discount]);
@@ -168,11 +171,10 @@ if(isset($_POST['update'])){
       <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
       <span>update image 03</span>
       <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
-
-      
-         <span>discount rate </span>
-         <input type="number" name="discount"  class="box" min="0" max="9999999999" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['discount']; ?>">
-      
+      <span>discount rate %</span>
+      <input type="number" name="discount"  class="box" min="0" max="9999999999" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['discount']; ?>">
+      <span>Stock </span>
+      <input type="number" name="stock"  class="box" min="0" max="9999999999" placeholder="enter Number of Stock" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['stock']; ?>">
 
       <div class="inputBox">
          <span>CATEGORY (require):</span>
