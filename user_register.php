@@ -35,8 +35,8 @@ if(isset($_POST['submit'])){
       if($pass != $cpass){
          $message[] = 'confirm password not matched!';
       }else{
-         $insert_user = $conn->prepare("INSERT INTO `users`(name, email, password) VALUES(?,?,?)");
-         $insert_user->execute([$name, $email, $cpass]);
+         $insert_user = $conn->prepare("INSERT INTO `users`(name, email,phone, password) VALUES(?,?,?,?)");
+         $insert_user->execute([$name, $email,$phone,$cpass]);
          $message[] = 'registered successfully, login now please!';
       }
    }
