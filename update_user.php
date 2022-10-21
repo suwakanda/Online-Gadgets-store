@@ -16,9 +16,33 @@ if(isset($_POST['submit'])){
    $name = filter_var($name, FILTER_SANITIZE_STRING);
    $email = $_POST['email'];
    $email = filter_var($email, FILTER_SANITIZE_STRING);
+   $phone = $_POST['phone'];
+   $phone = filter_var($phone, FILTER_SANITIZE_STRING);
 
-   $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ? WHERE id = ?");
-   $update_profile->execute([$name, $email, $user_id]);
+   $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
+   $prev_pass = $_POST['prev_pass'];
+   $old_pass = sha1($_POST['old_pass']);
+   $old_pass = filter_var($old_pass, FILTER_SANITIZE_STRING);
+   
+   if($old_pass == $empty_pass){
+      $message[] = 'please enter old password!';
+   }elseif($old_pass != $prev_pass){
+      $message[] = 'old password not matched!';
+   }elseif(!preg_match('/^[0-9]{10}+$/', $phone)) {
+      $message[] = 'Invalid Phone Number';
+   }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $message[] = "Invalid email format";
+    }else{
+      $update_profile = $conn->prepare("UPDATE `users` SET name = ?, email = ?, phone = ? WHERE id = ?");
+      $update_profile->execute([$name, $email, $phone, $user_id]);
+      $message[] = 'Updated successfully!';
+      
+   }
+
+}
+
+
+if(isset($_POST['reset_password'])){
 
    $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
    $prev_pass = $_POST['prev_pass'];
@@ -44,8 +68,7 @@ if(isset($_POST['submit'])){
          $message[] = 'please enter a new password!';
       }
    }
-   
-}
+ }
 
 ?>
 
@@ -73,12 +96,14 @@ if(isset($_POST['submit'])){
    <form action="" method="post">
       <h3>update now</h3>
       <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
-      <input type="text" name="name" required placeholder="enter your username" maxlength="20"  class="box" value="<?= $fetch_profile["name"]; ?>">
+      <input type="text" name="name" required placeholder="enter your username" maxlength="30"  class="box" value="<?= $fetch_profile["name"]; ?>">
       <input type="email" name="email" required placeholder="enter your email" maxlength="50"  class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>">
+      <input type="text" name="phone" required placeholder="enter your Phone number" maxlength="20"  class="box" value="<?= $fetch_profile["phone"]; ?>">
       <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="update now" class="btn" name="submit">
+      <input type="submit" value="Change Password" class="btn" name="reset_password">
    </form>
 
 </section>
