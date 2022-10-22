@@ -168,7 +168,7 @@ var swiper = new Swiper(".home-slider", {
 });
 
 var swiper = new Swiper(".products-slider", {
-   loop:true,
+   loop:false,
    spaceBetween: 20,
    pagination: {
       el: ".swiper-pagination",
