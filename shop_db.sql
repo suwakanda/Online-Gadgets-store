@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2022 at 12:44 PM
+-- Generation Time: Oct 22, 2022 at 08:54 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -57,6 +57,13 @@ CREATE TABLE `cart` (
   `discount` int(10) NOT NULL,
   `stock` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `pid`, `name`, `price`, `quantity`, `image`, `discount`, `stock`) VALUES
+(26, 1, 1, 'Samsung S22ultra', 5000, 1, 's221.JPG', 10, 0);
 
 -- --------------------------------------------------------
 
@@ -137,11 +144,11 @@ INSERT INTO `products` (`id`, `name`, `details`, `price`, `image_01`, `image_02`
 (3, 'Apple Watch Series 8', 'Apple Watch Series 8 uses the temperature sensor to provide women with retrospective ovulation estimates, which can be helpful for family planning purposes. The data also provides improved period predictions, and in watchOS 9, women can receive notifications if a logged cycle history shows a possible deviation like irregular, infrequent, or prolonged periods.', 4000, 'applewatch1.jpg', 'applewatch2.jpg', 'applewatch3.jpg', 'watch', 10, 10, 0),
 (4, 'Apple Magic Mouse 2', 'Magic Mouse is wireless and rechargeable, with an optimized foot design that lets it glide smoothly across your desk. The Multi-Touch surface allows you to perform simple gestures such as swiping between web pages and scrolling through documents.\r\n\r\nThe rechargeable battery will power your Magic Mouse for about a month or more between charges. It’s ready to go right out of the box and pairs automatically with your Mac.', 300, 'mouse1.jpg', 'mouse2.jpg', '', 'mouse', 10, 7, 0),
 (5, 'Sony ZV-E10', 'Designed for creative vloggers who aspire to an artistic look, the ZV-E10 takes care of the nuts and bolts of video production. Create a stunning vlog by taking advantage of interchangeable lenses, the large APS-C sensor, the built-in Directional 3-Capsule Mic and special features designed for vlogging – for a professional-looking vlog without the hassle.\r\n\r\nWith the new version software, Real-time Eye AF for animal is available when shooting movie. ', 3200, 'sonyzv1.jpg', 'songzy2.jpg', 'songzv3.jpg', 'camera', NULL, 8, 0),
-(6, 'Zenbook 14 UX425 (11th Gen Intel)', 'The beautiful new ZenBook 14 is more portable than ever. It’s thinner, lighter, and incredibly compact, yet includes HDMI, Thunderbolt™ 4 USB-C®, USB Type-A and MicroSD card reader for unrivaled versatility. Built to deliver powerful performance, ZenBook 14 is your perfect choice for an effortless on-the-go lifestyle.', 3699, 'Screen Shot 2022-10-18 at 11.57.59 AM.png', 'Screen Shot 2022-10-18 at 11.58.38 AM.png', 'Screen Shot 2022-10-18 at 11.58.23 AM.png', 'laptop', NULL, 0, 0),
-(7, 'Huawei Watch 3', 'The smartwatch is built with a Glass front, ceramic back, and titanium frame. It is 5 ATM water-resistant (50m water resistant) while the dimension of the device is 48 x 49.2 x 12.2 mm and weighs 54 grams.\r\n\r\nIt also supports eSIM along while the display size is 1.43 inches AMOLED that provides 466 x 466 pixels and the PPI density is 326. It is fueled with a Li-Ion battery + Wireless charging 10W.', 2399, 'Screen Shot 2022-10-18 at 12.02.30 PM.png', 'Screen Shot 2022-10-18 at 12.02.46 PM.png', 'Screen Shot 2022-10-18 at 12.03.00 PM.png', 'watch', 10, 0, 0),
-(8, 'Huawei MateBook Pro', 'Unprecedented Skin-Soothing\r\nMetallic Body,\r\nfor elegance from the inside out.\r\nStandout performance,\r\nsmart features,\r\nand super productivity.', 6789, 'Screen Shot 2022-10-18 at 12.19.45 PM.png', 'Screen Shot 2022-10-18 at 12.20.21 PM.png', 'Screen Shot 2022-10-18 at 12.21.11 PM.png', 'laptop', NULL, 0, 0),
+(6, 'Zenbook 14 UX425 (11th Gen Intel)', 'The beautiful new ZenBook 14 is more portable than ever. It’s thinner, lighter, and incredibly compact, yet includes HDMI, Thunderbolt™ 4 USB-C®, USB Type-A and MicroSD card reader for unrivaled versatility. Built to deliver powerful performance, ZenBook 14 is your perfect choice for an effortless on-the-go lifestyle.', 3699, 'Screen Shot 2022-10-18 at 11.57.59 AM.png', 'Screen Shot 2022-10-18 at 11.58.38 AM.png', 'Screen Shot 2022-10-18 at 11.58.23 AM.png', 'laptop', NULL, 6, 0),
+(7, 'Huawei Watch 3', 'The smartwatch is built with a Glass front, ceramic back, and titanium frame. It is 5 ATM water-resistant (50m water resistant) while the dimension of the device is 48 x 49.2 x 12.2 mm and weighs 54 grams.\r\n\r\nIt also supports eSIM along while the display size is 1.43 inches AMOLED that provides 466 x 466 pixels and the PPI density is 326. It is fueled with a Li-Ion battery + Wireless charging 10W.', 2399, 'Screen Shot 2022-10-18 at 12.02.30 PM.png', 'Screen Shot 2022-10-18 at 12.02.46 PM.png', 'Screen Shot 2022-10-18 at 12.03.00 PM.png', 'watch', 10, 4, 0),
+(8, 'Huawei MateBook Pro', 'Unprecedented Skin-Soothing\r\nMetallic Body,\r\nfor elegance from the inside out.\r\nStandout performance,\r\nsmart features,\r\nand super productivity.', 6789, 'Screen Shot 2022-10-18 at 12.19.45 PM.png', 'Screen Shot 2022-10-18 at 12.20.21 PM.png', 'Screen Shot 2022-10-18 at 12.21.11 PM.png', 'laptop', NULL, 7, 0),
 (9, 'Microsoft Surface Laptop 4', 'Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen. Do it all with a perfect balance of sleek design, speed, immersive audio, and significantly longer battery life than before', 6699, 'Screen Shot 2022-10-18 at 12.24.16 PM.png', 'Screen Shot 2022-10-18 at 12.24.23 PM.png', 'Screen Shot 2022-10-18 at 12.24.34 PM.png', 'laptop', NULL, 0, 0),
-(10, 'Sony ZV-1 Digital Camera', 'The ZV-1 is designed for casual videography with a selfie-friendly vari-angle LCD screen, body grip and a recording lamp. A directional 3-capsule mic with wind screen picks up your voice clearly with less wind noise; and the Bokeh switch and Product Showcase Setting make videos more interesting with less effort.', 3399, 'Screen Shot 2022-10-18 at 1.05.01 PM.png', 'Screen Shot 2022-10-18 at 1.05.11 PM.png', 'Screen Shot 2022-10-18 at 1.05.22 PM.png', 'camera', NULL, 0, 0);
+(10, 'Sony ZV-1 Digital Camera', 'The ZV-1 is designed for casual videography with a selfie-friendly vari-angle LCD screen, body grip and a recording lamp. A directional 3-capsule mic with wind screen picks up your voice clearly with less wind noise; and the Bokeh switch and Product Showcase Setting make videos more interesting with less effort.', 3399, 'Screen Shot 2022-10-18 at 1.05.01 PM.png', 'Screen Shot 2022-10-18 at 1.05.11 PM.png', 'Screen Shot 2022-10-18 at 1.05.22 PM.png', 'camera', NULL, 13, 0);
 
 -- --------------------------------------------------------
 
@@ -180,13 +187,6 @@ CREATE TABLE `wishlist` (
   `discount` int(100) NOT NULL,
   `stock` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `wishlist`
---
-
-INSERT INTO `wishlist` (`id`, `user_id`, `pid`, `name`, `price`, `image`, `discount`, `stock`) VALUES
-(22, 1, 1, 'Samsung S22ultra', 5000, 's221.JPG', 10, 3);
 
 --
 -- Indexes for dumped tables
@@ -248,7 +248,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `messages`
