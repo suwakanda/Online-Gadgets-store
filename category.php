@@ -41,7 +41,7 @@ include 'components/wishlist_cart.php';
 
    <?php
      $category = $_GET['category'];
-     $select_products = $conn->prepare("SELECT * FROM `products` WHERE category LIKE '%{$category}%' AND `isActive` = 0"); 
+     $select_products = $conn->prepare("SELECT * FROM `products` WHERE category LIKE '%{$category}%' AND `isActive` = 0 AND `stock` > 0 "); 
      $select_products->execute();
      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){

@@ -136,77 +136,6 @@ if(isset($_GET['deactive'])){
 
 <?php include '../components/admin_header.php'; ?>
 
-<section class="add-products">
-
-   <h1 class="heading">add product</h1>
-
-   <form action="" method="post" enctype="multipart/form-data">
-      <div class="flex">
-         <div class="inputBox">
-            <span>product name (required)</span>
-            <input type="text" class="box" required maxlength="100" placeholder="enter product name" name="name">
-         </div>
-         <div class="inputBox">
-            <span>product price (required)</span>
-            <input type="number" min="0" class="box" required max="9999999999" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" name="price">
-         </div>
-        <div class="inputBox">
-            <span>image 01 (required)</span>
-            <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
-        </div>
-        <div class="inputBox">
-            <span>image 02 (required)</span>
-            <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
-        </div>
-        <div class="inputBox">
-            <span>image 03 </span>
-            <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" >
-        </div>
-         <div class="inputBox">
-            <span>product details (required)</span>
-            <textarea name="details" placeholder="enter product details" class="box" required maxlength="500" cols="30" rows="10"></textarea>
-         </div>
-
-         <div class="inputBox">
-            <span>discount rate </span>
-            <input type="number" min="0" class="box"  max="100" placeholder="enter discount rate %" onkeypress="if(this.value.length == 10) return false;" name="discount">
-         </div>
-
-         <div class="inputBox">
-            <span>stock (required)</span>
-            <input type="number" min="0" class="box"  max="100" placeholder="enter number of stock" onkeypress="if(this.value.length == 10) return false;" name="stock" required>
-         </div>
-
-         <div class="inputBox">
-         <span>category:</span>
-            <select name="category" class="box" required>
-            <option value="laptop">laptop</option>
-            <option value="camera">camera</option>
-            <option value="mouse">mouse</option>
-            <option value="smartphone">smartphone</option>
-            <option value="watch">watch</option>
-            </select>
-         </div>
-
-         <div class="inputBox">
-         <span>Status:</span>
-            <select name="status" class="box" required>
-            <option selected value="0">Active</option>
-            <option value="1">Disable</option>
-            </select>
-         </div>
-
-
-      </div>
-
-      
-      
-      <input type="submit" value="add product" class="normal-btn" name="add_product">
-   </form>
-
-</section>
-
-
 
 <section class="table-product" >
 <h1 class="heading">products added</h1>
@@ -284,6 +213,80 @@ if(isset($_GET['deactive'])){
         </div>
 </div>
 </section>
+
+
+
+<section class="add-products">
+
+   <h1 class="heading">add product</h1>
+
+   <form action="" method="post" enctype="multipart/form-data">
+      <div class="flex">
+         <div class="inputBox">
+            <span>product name (required)</span>
+            <input type="text" class="box" required maxlength="100" placeholder="enter product name" name="name">
+         </div>
+         <div class="inputBox">
+            <span>product price (required)</span>
+            <input type="number" min="0" class="box" required max="9999999999" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" name="price">
+         </div>
+        <div class="inputBox">
+            <span>image 01 (required)</span>
+            <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+        </div>
+        <div class="inputBox">
+            <span>image 02 (required)</span>
+            <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" required>
+        </div>
+        <div class="inputBox">
+            <span>image 03 </span>
+            <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box" >
+        </div>
+         <div class="inputBox">
+            <span>product details (required)</span>
+            <textarea name="details" placeholder="enter product details" class="box" required maxlength="500" cols="30" rows="10"></textarea>
+         </div>
+
+         <div class="inputBox">
+            <span>discount rate </span>
+            <input type="number" min="0" class="box"  max="100" placeholder="enter discount rate %" onkeypress="if(this.value.length == 10) return false;" name="discount">
+         </div>
+
+         <div class="inputBox">
+            <span>stock (required)</span>
+            <input type="number" min="0" class="box"  max="100" placeholder="enter number of stock" onkeypress="if(this.value.length == 10) return false;" name="stock" required>
+         </div>
+
+         <div class="inputBox">
+         <span>category:</span>
+            <select name="category" class="box" required>
+            <option value="laptop">laptop</option>
+            <option value="camera">camera</option>
+            <option value="mouse">mouse</option>
+            <option value="smartphone">smartphone</option>
+            <option value="watch">watch</option>
+            </select>
+         </div>
+
+         <div class="inputBox">
+         <span>Status:</span>
+            <select name="status" class="box" required>
+            <option selected value="0">Active</option>
+            <option value="1">Disable</option>
+            </select>
+         </div>
+
+
+      </div>
+
+      
+      
+      <input type="submit" value="add product" class="normal-btn" name="add_product">
+   </form>
+
+</section>
+
+
 
 
 

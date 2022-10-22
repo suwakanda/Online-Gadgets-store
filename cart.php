@@ -73,11 +73,16 @@ if(isset($_POST['update_qty'])){
       <div class="name"><?= $fetch_cart['name']; ?></div>
       <div class="flex">
          <div class="price">RM<?= $fetch_cart['price']; ?>/
+         
          <?= $fetch_cart['discount']; ?>%</div>
-         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
+         <?php $select_product = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
+      $select_product->execute([$fetch_cart['pid']]);
+      if($select_cart->rowCount() > 0){
+      $fetch_product = $select_product->fetch(PDO::FETCH_ASSOC);
+      ?>
+         <input type="number" name="qty" class="qty" min="1" max="<?= $fetch_product['stock'];} ?>" onkeypress="if(this.value.length == 2) return false;" value="<?= $fetch_cart['quantity']; ?>">
          <button type="submit" class="fas fa-edit" name="update_qty"></button>
       </div>
-
 
       <?php 
          $discountRate = $fetch_cart['discount']/100;

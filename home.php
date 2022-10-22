@@ -134,7 +134,7 @@ include 'components/wishlist_cart.php';
 
    <?php
    
-     $select_products = $conn->prepare("SELECT * FROM `products` WHERE `isActive` = 0 ORDER BY id DESC LIMIT 6 "); 
+     $select_products = $conn->prepare("SELECT * FROM `products` WHERE `isActive` = 0 AND `stock` > 0 ORDER BY id DESC LIMIT 6 "); 
      $select_products->execute();
      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
