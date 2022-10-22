@@ -71,14 +71,12 @@ include 'components/wishlist_cart.php';
             <div class="name"><?= $fetch_product['name']; ?></div>
             <div class="flex">
 
-
-            <div class="price">$<?= $fetch_product['price']; ?>
-         
    
       <?php if(isset($fetch_product['discount'])){ $discountRate = $fetch_product['discount']/100;?>
-         /
-      <?= $fetch_product['discount']; ?>%</div>
-      <div class="discount"> discount : <span>RM<?= $discount =  ($fetch_product['price']* $discountRate) ; }?></span> </div>
+         <div class="price">Now RM<?= $fetch_product['price']-($fetch_product['price']*$discountRate); ?></div>
+      <div class="discount"> <span style="text-decoration: line-through">RM<?= $fetch_product['price'] ;?></span>     <span><?= $fetch_product['discount']; ?> % OFF</span></div><?php }else{ ?><div class="price">$<?= $fetch_product['price']; ?>
+      </div> <?php }?>
+  
             <input type="number" name="qty" class="qty" min="1" max="<?= $fetch_product['stock']; ?>" onkeypress="if(this.value.length == 2) return false;" value="1">
  
             </div>

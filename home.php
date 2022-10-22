@@ -48,7 +48,7 @@ include 'components/wishlist_cart.php';
          </div>
          <div class="content">
             <span>upto 10% off</span>
-            <h3>latest smartphones</h3>
+            <h3>smartphones</h3>
             <a href="shop.php" class="btn">shop now</a>
          </div>
       </div>
@@ -59,7 +59,7 @@ include 'components/wishlist_cart.php';
          </div>
          <div class="content">
             <span>upto 10% off</span>
-            <h3>latest watches</h3>
+            <h3>watches</h3>
             <a href="shop.php" class="btn">shop now</a>
          </div>
       </div>
@@ -70,7 +70,7 @@ include 'components/wishlist_cart.php';
          </div>
          <div class="content">
             <span>upto 10% off</span>
-            <h3>latest camera</h3>
+            <h3>camera</h3>
             <a href="shop.php" class="btn">shop now</a>
          </div>
       </div>
