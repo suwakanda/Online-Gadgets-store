@@ -60,6 +60,8 @@ if(isset($_POST['order'])){
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
 
+
+
 </head>
 <body>
    
@@ -149,7 +151,7 @@ if(isset($_POST['order'])){
             <input type="number" min="0" name="pin_code" placeholder="e.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
          </div>
       </div>
-
+      
       <input type="submit" name="order" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" value="place order">
 
    </form>
@@ -171,6 +173,7 @@ if(isset($_POST['order'])){
 <?php include 'components/footer.php'; ?>
 
 <script src="js/script.js"></script>
+
 
 </body>
 </html>
