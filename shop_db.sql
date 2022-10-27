@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2022 at 08:54 PM
+-- Generation Time: Oct 27, 2022 at 11:33 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `id` int(100) NOT NULL,
+  `role_id` int(10) NOT NULL,
   `name` varchar(20) NOT NULL,
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -37,8 +38,8 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `name`, `password`) VALUES
-(1, 'admin', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2');
+INSERT INTO `admins` (`id`, `role_id`, `name`, `password`) VALUES
+(1, 1, 'admin', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2');
 
 -- --------------------------------------------------------
 
@@ -57,13 +58,6 @@ CREATE TABLE `cart` (
   `discount` int(10) NOT NULL,
   `stock` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `pid`, `name`, `price`, `quantity`, `image`, `discount`, `stock`) VALUES
-(26, 1, 1, 'Samsung S22ultra', 5000, 1, 's221.JPG', 10, 0);
 
 -- --------------------------------------------------------
 
@@ -95,6 +89,7 @@ INSERT INTO `messages` (`id`, `user_id`, `name`, `email`, `number`, `message`) V
 
 CREATE TABLE `orders` (
   `id` int(100) NOT NULL,
+  `reference_number` varchar(100) NOT NULL,
   `user_id` int(100) NOT NULL,
   `name` varchar(20) NOT NULL,
   `number` varchar(10) NOT NULL,
@@ -103,16 +98,76 @@ CREATE TABLE `orders` (
   `address` varchar(500) NOT NULL,
   `total_products` varchar(1000) NOT NULL,
   `total_price` int(100) NOT NULL,
-  `placed_on` date NOT NULL DEFAULT current_timestamp(),
-  `payment_status` varchar(20) NOT NULL DEFAULT 'pending'
+  `placed_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(20) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
-(2, 1, 'wwww eeee', '123456786', 'qweqwe@gmail.com', 'cash on delivery', 'flat no. 21, taman desa, jitra, kedah, malaysia - 06000', 'Sony ZV-E10 (3200 x 1) - ', 3200, '2022-10-15', 'pending');
+INSERT INTO `orders` (`id`, `reference_number`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `status`) VALUES
+(2, '201406231415', 1, 'superman', '123456786', 'qweqwe@gmail.com', 'cash on delivery', 'flat no. 21, taman desa, jitra, kedah, malaysia - 06000', 'Sony ZV-E10 (3200 x 1) - ', 3200, '2022-10-14 16:00:00', '1'),
+(4, '', 1, 'qin', '1234567800', 'qweqwe@gmail.com', 'cash on delivery', 'flat no. 21, taman desa, jitra, kedah, Malaysia - 06000', 'Samsung S22ultra (5000 x 1) - Huawei Watch 3 (2399 x 1) - Huawei MateBook Pro (6789 x 1) - ', 13448, '2022-10-25 16:00:00', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parcels`
+--
+
+CREATE TABLE `parcels` (
+  `id` int(30) NOT NULL,
+  `reference_number` varchar(100) NOT NULL,
+  `recipient_name` text NOT NULL,
+  `recipient_address` text NOT NULL,
+  `recipient_contact` text NOT NULL,
+  `price` float NOT NULL,
+  `status` int(2) NOT NULL DEFAULT 0,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `parcels`
+--
+
+INSERT INTO `parcels` (`id`, `reference_number`, `recipient_name`, `recipient_address`, `recipient_contact`, `price`, `status`, `date_created`) VALUES
+(1, '201406231415', 'Claire Blake', 'Sample', 'Sample', 2500, 7, '2020-11-26 16:15:46'),
+(2, '117967400213', 'Claire Blake', 'Sample', 'Sample', 2500, 1, '2020-11-26 16:46:03'),
+(3, '983186540795', 'Claire Blake', 'Sample', 'Sample', 1500, 2, '2020-11-26 16:46:03'),
+(4, '514912669061', 'John Smith', 'Sample Address', '+12345', 1900, 0, '2020-11-27 13:52:14'),
+(5, '897856905844', 'John Smith', 'Sample Address', '+12345', 1450, 0, '2020-11-27 13:52:14'),
+(6, '505604168988', 'Sample', 'Sample', '+12345', 2500, 1, '2020-11-27 14:06:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parcel_tracks`
+--
+
+CREATE TABLE `parcel_tracks` (
+  `id` int(30) NOT NULL,
+  `parcel_id` int(30) NOT NULL,
+  `status` int(2) NOT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `parcel_tracks`
+--
+
+INSERT INTO `parcel_tracks` (`id`, `parcel_id`, `status`, `date_created`) VALUES
+(1, 2, 1, '2020-11-27 09:53:27'),
+(2, 3, 1, '2020-11-27 09:55:17'),
+(3, 1, 1, '2020-11-27 10:28:01'),
+(4, 1, 2, '2020-11-27 10:28:10'),
+(5, 1, 3, '2020-11-27 10:28:16'),
+(6, 1, 4, '2020-11-27 11:05:03'),
+(7, 1, 5, '2020-11-27 11:05:17'),
+(8, 1, 7, '2020-11-27 11:05:26'),
+(9, 3, 2, '2020-11-27 11:05:41'),
+(10, 6, 1, '2020-11-27 14:06:57'),
+(11, 1, 0, '2020-11-26 16:15:46');
 
 -- --------------------------------------------------------
 
@@ -158,6 +213,7 @@ INSERT INTO `products` (`id`, `name`, `details`, `price`, `image_01`, `image_02`
 
 CREATE TABLE `users` (
   `id` int(100) NOT NULL,
+  `role_id` int(10) NOT NULL COMMENT '1=admin,2=user,3=sender',
   `name` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -168,8 +224,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`) VALUES
-(1, 'superman', 'qweqwe@gmail.com', 'f4542db9ba30f7958ae42c113dd87ad21fb2eddb', '0123456789');
+INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `phone`) VALUES
+(1, 2, 'superman', 'qweqwe@gmail.com', 'f4542db9ba30f7958ae42c113dd87ad21fb2eddb', '0123456789');
 
 -- --------------------------------------------------------
 
@@ -217,6 +273,18 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `parcels`
+--
+ALTER TABLE `parcels`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parcel_tracks`
+--
+ALTER TABLE `parcel_tracks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -242,13 +310,13 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -260,25 +328,37 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `parcels`
+--
+ALTER TABLE `parcels`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `parcel_tracks`
+--
+ALTER TABLE `parcel_tracks`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
