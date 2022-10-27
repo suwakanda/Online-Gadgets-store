@@ -16,8 +16,10 @@ if(isset($_POST['submit'])){
    $row = $select_admin->fetch(PDO::FETCH_ASSOC);
 
    if($select_admin->rowCount() > 0){
+      
       $_SESSION['admin_id'] = $row['id'];
       header('location:dashboard.php');
+      
    }else{
       $message[] = 'incorrect username or password!';
    }

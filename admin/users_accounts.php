@@ -57,7 +57,7 @@ if(isset($_GET['delete'])){
           <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
-                      <th class="text-center">Product id</th>
+                      <th class="text-center">User id</th>
                       <th  class="text-center">Name</th>
                       <th  class="text-center">Email</th>
                       <th  class="text-center">Phone</th> 
@@ -79,6 +79,60 @@ if(isset($_GET['delete'])){
                     
                     <td><?php echo $fetch_accounts['email']; ?></td>
                     <td><?php echo $fetch_accounts['phone']; ?></td>
+                   
+                    <td>
+                     <a onclick="return confirm('Are you sure To Delete ? The user related information will also be delete!')" class="btn btn-danger btn-sm " href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>">Remove</a>     
+                    </td>
+                     
+                  
+                  <?php }?>
+                  <?php }else{
+                     echo '<p class="empty">no accounts available!</p>';
+                  }?>
+                  
+                  
+                  </tr>
+                  </tbody>
+
+                  
+          </table>
+        </div>
+        </div>
+</div>
+</section>
+
+
+
+<section class="table-product" >
+<h1 class="heading">admin accounts</h1>
+<div class="card " style="width: 100%;">
+
+        <div class="card-header">
+        <div class="card-body pr-2 pl-2">
+
+          <table id="example" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th class="text-center">User id</th>
+                      <th  class="text-center">Name</th>
+
+                      <th  width='25%' class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                     $select_accounts = $conn->prepare("SELECT * FROM `admins`");
+                     $select_accounts->execute();
+                     if($select_accounts->rowCount() > 0){
+                        while($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)){   
+                  ?>
+                  
+                  <tr class="text-center">
+                  
+                    <td><?php echo $fetch_accounts['id'];?></td>
+                    <td><a href="update_product.php?update=<?php echo $fetch_accounts['id'];?>"><?php echo $fetch_accounts['name'];?></a></td>
+                    
+                    
                    
                     <td>
                      <a onclick="return confirm('Are you sure To Delete ? The user related information will also be delete!')" class="btn btn-danger btn-sm " href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>">Remove</a>     
