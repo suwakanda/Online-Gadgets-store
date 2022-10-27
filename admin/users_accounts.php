@@ -75,7 +75,7 @@ if(isset($_GET['delete'])){
                   <tr class="text-center">
                   
                     <td><?php echo $fetch_accounts['id'];?></td>
-                    <td><a href="update_product.php?update=<?php echo $fetch_accounts['id'];?>"><?php echo $fetch_accounts['name'];?></a></td>
+                    <td><?php echo $fetch_accounts['name'];?></td>
                     
                     <td><?php echo $fetch_accounts['email']; ?></td>
                     <td><?php echo $fetch_accounts['phone']; ?></td>
@@ -130,7 +130,7 @@ if(isset($_GET['delete'])){
                   <tr class="text-center">
                   
                     <td><?php echo $fetch_accounts['id'];?></td>
-                    <td><a href="update_product.php?update=<?php echo $fetch_accounts['id'];?>"><?php echo $fetch_accounts['name'];?></a></td>
+                    <td><?php echo $fetch_accounts['name'];?></td>
                     
                     
                    

@@ -12,11 +12,11 @@ if(!isset($admin_id)){
 
 if(isset($_POST['update_payment'])){
    $order_id = $_POST['order_id'];
-   $payment_status = $_POST['payment_status'];
-   $payment_status = filter_var($payment_status, FILTER_SANITIZE_STRING);
-   $update_payment = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
-   $update_payment->execute([$payment_status, $order_id]);
-   $message[] = 'payment status updated!';
+   $status = $_POST['status'];
+   $status = filter_var($status, FILTER_SANITIZE_STRING);
+   $update_payment = $conn->prepare("UPDATE `orders` SET status = ? WHERE id = ?");
+   $update_payment->execute([$status, $order_id]);
+   $message[] = 'status updated!';
 }
 
 if(isset($_GET['delete'])){
@@ -69,10 +69,10 @@ if(isset($_GET['delete'])){
       <p> payment method : <span><?= $fetch_orders['method']; ?></span> </p>
       <form action="" method="post">
          <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
-         <select name="payment_status" class="select">
-            <option selected disabled><?= $fetch_orders['payment_status']; ?></option>
-            <option value="pending">pending</option>
-            <option value="completed">completed</option>
+         <select name="status" class="select">
+            <option selected disabled><?= $fetch_orders['status']; ?></option>
+            <option value="2">pending</option>
+            <option value="1">Done</option>
          </select>
         <div class="flex-btn">
          <input type="submit" value="update" class="option-btn" name="update_payment">

@@ -23,7 +23,7 @@ if(isset($_GET['delete'])){
    $delete_id = $_GET['delete'];
    $delete_order = $conn->prepare("DELETE FROM `orders` WHERE id = ?");
    $delete_order->execute([$delete_id]);
-   header('location:placed_orders.php');
+   header('location:orders.php');
 }
 
 ?>
@@ -65,7 +65,8 @@ if(isset($_GET['delete'])){
                       <th  class="text-center">Phone</th> 
                       <th  class="text-center">Total_products</th> 
                       <th  class="text-center">Total_price</th> 
-                      <th  class="text-center">Placed_on</th> 
+                      <th  class="text-center">Status</th> 
+                      <th  class="text-center">Placed_on</th>
                       <th  width='25%' class="text-center">Action</th>
                     </tr>
                   </thead>
@@ -80,16 +81,18 @@ if(isset($_GET['delete'])){
                   <tr class="text-center">
                   
                     <td><?php echo $fetch_orders['reference_number'];?></td>
-                    <td><a href="update_product.php?update=<?php echo $fetch_orders['id'];?>"><?php echo $fetch_orders['name'];?></a></td>
+                    <td><?php echo $fetch_orders['name'];?></td>
                     
                     <td><?php echo $fetch_orders['email']; ?></td>
                     <td><?php echo $fetch_orders['number']; ?></td>
                     <td><?php echo $fetch_orders['total_products']; ?></td>
                     <td><?php echo $fetch_orders['total_price']; ?></td>
-                    <td><?php echo $fetch_orders['placed_on']; ?></td>
+                    <td><?php if($fetch_orders['status'] == '1'){ echo '<span class="badge badge-lg badge-info text-white">Done</span>'; }else{ echo '<span class="badge badge-lg badge-warning text-white">Pending</span>'; }; ?> </td>
+                    <td><span class="badge badge-lg badge-secondary text-white"><?php echo  $fetch_orders['placed_on'];  ?></span></td>
                    
                     <td>
-                     <a onclick="return confirm('Are you sure To Delete ? The user related information will also be delete!')" class="btn btn-danger btn-sm " href="users_accounts.php?delete=<?= $fetch_accounts['id']; ?>">Remove</a>     
+                    <a class="btn btn-success btn-sm" href="view_order.php?id=<?php echo $fetch_orders['id'];?>">View</a>
+                     <a onclick="return confirm('Are you sure To Delete ? The orders information will also be delete!')" class="btn btn-danger btn-sm " href="orders.php?delete=<?= $fetch_orders['id']; ?>">Remove</a>     
                     </td>
                      
                   
