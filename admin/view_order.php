@@ -48,12 +48,13 @@ if(isset($_GET['delete'])){
 
 <section class="orders">
 
-<h1 class="heading">placed orders</h1>
+<h1 class="heading">Details orders</h1>
 
 <div class="box-container">
 
    <?php
-      $select_orders = $conn->prepare("SELECT * FROM `orders`");
+      $order_id = $_GET['order_id'];
+      $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE id LIKE '%{$order_id}%' ");
       $select_orders->execute();
       if($select_orders->rowCount() > 0){
          while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){

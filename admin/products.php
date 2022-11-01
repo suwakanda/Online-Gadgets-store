@@ -174,7 +174,7 @@ if(isset($_GET['deactive'])){
                     
                     <td><?php echo $fetch_products['category']; ?></td>
                     <td><?php echo $fetch_products['price']; ?></td>
-                    <td><?php if(isset($fetch_products['discount'])){echo $fetch_products['discount']; ?>%<?php }else{echo 'NO';} ?></td>
+                    <td><?php if(isset($fetch_products['discount'])){echo $fetch_products['discount']; ?>%<?php }else{echo '0';} ?></td>
                     <td><?php echo $fetch_products['stock']; ?></td>
                     <td>
                           <?php if ($fetch_products['isActive'] == '0') { ?>
