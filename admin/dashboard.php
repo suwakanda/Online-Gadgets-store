@@ -50,7 +50,7 @@ if(!isset($admin_id)){
          ?>
          <h3><span>RM</span><?= $total_pendings; ?><span>/-</span></h3>
          <p>total pendings</p>
-         <a href="placed_orders.php" class="normal-btn">see orders</a>
+         <a href="all_orders.php" class="normal-btn">see orders</a>
       </div>
 
       <div class="box">
@@ -66,7 +66,7 @@ if(!isset($admin_id)){
          ?>
          <h3><span>RM</span><?= $total_completes; ?><span>/-</span></h3>
          <p>completed orders</p>
-         <a href="placed_orders.php" class="normal-btn">see orders</a>
+         <a href="all_orders.php" class="normal-btn">see orders</a>
       </div>
 
       
@@ -123,16 +123,8 @@ if(!isset($admin_id)){
 
 
 
-
-
-
-
-
-
-
-
-
 <script src="../js/admin_script.js"></script>
    
 </body>
 </html>
+
