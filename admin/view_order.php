@@ -41,9 +41,9 @@ if(isset($_GET['delete'])){
    <link rel="stylesheet" href="../css/admin_style.css">
    
 
+
 </head>
 <body>
-
 <?php include '../components/admin_header.php'; ?>
 
 <section class="orders">
@@ -84,7 +84,7 @@ if(isset($_GET['delete'])){
    <?php
          }
       }else{
-         echo '<p class="empty">no orders placed yet!</p>';
+         echo '<p class="empty">order not found!!!</p>';
       }
    ?>
 
