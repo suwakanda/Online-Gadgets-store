@@ -71,7 +71,7 @@ if(isset($_GET['delete'])){
       <form action="" method="post">
          <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
          <select name="status" class="select">
-            <option selected disabled><?= $fetch_orders['status']; ?></option>
+            <option selected disabled><?php if($fetch_orders['status'] == 1){echo "Done";}else{echo "pending";}  ?></option>
             <option value="2">pending</option>
             <option value="1">Done</option>
          </select>

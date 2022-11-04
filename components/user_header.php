@@ -21,7 +21,7 @@
          <a href="home.php">home</a>
          <a href="about.php">about</a>
          <a href="orders.php">orders</a>
-         <a href="shop.php">shop</a>
+         <a href="shop.php">products</a>
          <a href="contact.php">contact</a>
       </nav>
 

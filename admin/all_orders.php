@@ -92,7 +92,7 @@ if(isset($_GET['delete'])){
                    
                     <td>
                     <a class="btn btn-success btn-sm" href="view_order.php?order_id=<?php echo $fetch_orders['id'];?>">View</a>
-                    <a class="btn btn-info btn-sm" href="track.php?track_id=<?php echo $fetch_orders['reference_number'];?>">Traking</a>
+                    <a class="btn btn-info btn-sm" href="select_track.php?track_id=<?php echo $fetch_orders['reference_number'];?>">Traking</a>
                      <a onclick="return confirm('Are you sure To Delete ? The orders information will also be delete!')" class="btn btn-danger btn-sm " href="orders.php?delete=<?= $fetch_orders['id']; ?>">Remove</a>     
                     </td>
                      
