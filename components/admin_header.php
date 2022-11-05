@@ -11,6 +11,15 @@
    }
 ?>
 
+
+<?php
+            $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+            $select_profile->execute([$admin_id]);
+            $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+
+            if($fetch_profile['role_id'] == 1){
+?>
+
 <header class="header">
 
    <section class="flex">
@@ -32,11 +41,7 @@
       </div>
 
       <div class="profile">
-         <?php
-            $select_profile = $conn->prepare("SELECT * FROM `admins` WHERE id = ?");
-            $select_profile->execute([$admin_id]);
-            $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
-         ?>
+         
          <p><?= $fetch_profile['name']; ?></p>
          <a href="../admin/update_profile.php" class="normal-btn">update profile</a>
          
@@ -46,3 +51,38 @@
    </section>
 
 </header>
+
+<?php }elseif($fetch_profile['role_id'] == 2){ ?>
+   
+
+<header class="header">
+
+   <section class="flex">
+
+      <a href="../admin/sender_dashboard.php" class="logo">Admin<span>Panel</span></a>
+
+      <nav class="navbar">
+         <a href="../admin/sender_dashboard.php">home</a>
+         
+         <a href="../admin/all_parcel.php">orders</a>
+         
+         <a href="../admin/track.php">tracking</a>
+      </nav>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+      </div>
+
+      <div class="profile">
+         
+         <p><?= $fetch_profile['name']; ?></p>
+         <a href="../admin/update_profile.php" class="normal-btn">update profile</a>
+         
+         <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a> 
+      </div>
+
+   </section>
+
+</header>
+<?php } ?>

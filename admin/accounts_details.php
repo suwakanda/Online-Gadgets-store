@@ -38,35 +38,36 @@ if(isset($_GET['delete'])){
 
 <section class="accounts">
 
-   <h1 class="heading">admin accounts</h1>
+   <h1 class="heading">accounts</h1>
 
    <div class="box-container">
 
-   <div class="box">
-      <p>add new admin</p>
-      <a href="register_admin.php" class="option-btn">register admin</a>
-   </div>
 
    <?php
-      $select_accounts = $conn->prepare("SELECT * FROM `admins`");
+      $id = $_GET['id'];
+      $select_accounts = $conn->prepare("SELECT * FROM `users` WHERE id LIKE '%{$id}%'");
       $select_accounts->execute();
-      if($select_accounts->rowCount() > 0){
-         while($fetch_accounts = $select_accounts->fetch(PDO::FETCH_ASSOC)){   
+      $row = $select_accounts->fetch(PDO::FETCH_ASSOC);
+      if($select_accounts->rowCount() > 0){  
    ?>
    <div class="box">
-      <p> admin id : <span><?= $fetch_accounts['id']; ?></span> </p>
-      <p> admin name : <span><?= $fetch_accounts['name']; ?></span> </p>
+      <p> id : <span><?= $row['id']; ?></span> </p>
+      <p> name : <span><?= $row['name']; ?></span> </p>
+      <p> email : <span><?= $row['email']; ?></span> </p>
+      <p> phone : <span><?= $row['phone']; ?></span> </p>
+      <p> address : <span><?= $row['address']; ?></span> </p>
+      
       <div class="flex-btn">
-         <a href="admin_accounts.php?delete=<?= $fetch_accounts['id']; ?>" onclick="return confirm('delete this account?')" class="delete-btn">delete</a>
+         <a href="admin_accounts.php?delete=<?= $row['id']; ?>" onclick="return confirm('delete this account?')" class="delete-btn">delete</a>
          <?php
-            if($fetch_accounts['id'] == $admin_id){
+            if($row['id'] == $admin_id){
                echo '<a href="update_profile.php" class="option-btn">update</a>';
             }
          ?>
       </div>
    </div>
    <?php
-         }
+         
       }else{
          echo '<p class="empty">no accounts available!</p>';
       }

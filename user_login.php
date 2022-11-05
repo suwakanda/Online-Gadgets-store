@@ -22,8 +22,16 @@ if(isset($_POST['submit'])){
    $row = $select_user->fetch(PDO::FETCH_ASSOC);
 
    if($select_user->rowCount() > 0){
-      $_SESSION['user_id'] = $row['id'];
-      header('location:home.php');
+      if($row['role_id']==1){
+         $_SESSION['admin_id'] = $row['id'];
+         header('location:admin/dashboard.php');}
+         else if($row['role_id']==2){
+         $_SESSION['admin_id'] = $row['id'];
+         header('location:admin/sender_dashboard.php');
+         }else if($row['role_id']==3){
+         $_SESSION['user_id'] = $row['id'];
+         header('location:home.php');}
+
    }else{
       $message[] = 'incorrect username or password!';
    }

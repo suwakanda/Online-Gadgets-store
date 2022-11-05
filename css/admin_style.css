@@ -488,7 +488,7 @@ section{
 
 .accounts .box-container{
    display: grid;
-   grid-template-columns: repeat(auto-fit, 33rem);
+   grid-template-columns: repeat(auto-fit, 100rem);
    gap:1.5rem;
    align-items: flex-start;
    justify-content: center;

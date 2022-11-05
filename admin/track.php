@@ -120,7 +120,12 @@ if(isset($_POST['submit'])){
 								case '7':
 									echo "<span >Delivered</span>";
 									break;
-								
+								case '8':
+										echo "<span > Picked-up</span>";
+										break;
+								case '9':
+										echo "<span > Unsuccessfull Delivery Attempt</span>";
+										break;
 								
 								default:
 									echo "<span> Item Accepted by Courier</span>";

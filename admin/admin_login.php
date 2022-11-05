@@ -11,14 +11,18 @@ if(isset($_POST['submit'])){
    $pass = sha1($_POST['pass']);
    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
 
-   $select_admin = $conn->prepare("SELECT * FROM `admins` WHERE name = ? AND password = ?");
+   $select_admin = $conn->prepare("SELECT * FROM `users` WHERE name = ? AND password = ?");
    $select_admin->execute([$name, $pass]);
    $row = $select_admin->fetch(PDO::FETCH_ASSOC);
 
    if($select_admin->rowCount() > 0){
-      
+      if($row['role_id']==1){
       $_SESSION['admin_id'] = $row['id'];
-      header('location:dashboard.php');
+      header('location:dashboard.php');}
+      else if($row['role_id']==2){
+         $_SESSION['admin_id'] = $row['id'];
+         header('location:sender_dashboard.php');
+      }
       
    }else{
       $message[] = 'incorrect username or password!';

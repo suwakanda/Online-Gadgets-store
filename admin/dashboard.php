@@ -95,7 +95,7 @@ if(!isset($admin_id)){
 
       <div class="box">
          <?php
-            $select_users = $conn->prepare("SELECT * FROM `users`");
+            $select_users = $conn->prepare("SELECT * FROM `users` WHERE role_id='3'");
             $select_users->execute();
             $number_of_users = $select_users->rowCount()
          ?>
@@ -106,7 +106,7 @@ if(!isset($admin_id)){
 
       <div class="box">
          <?php
-            $select_admins = $conn->prepare("SELECT * FROM `admins`");
+            $select_admins = $conn->prepare("SELECT * FROM `users` WHERE role_id='1'");
             $select_admins->execute();
             $number_of_admins = $select_admins->rowCount()
          ?>
