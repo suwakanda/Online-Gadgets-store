@@ -22,6 +22,12 @@ if(!isset($admin_id)){
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js">
+
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+   
+
    <link rel="stylesheet" href="../css/admin_style.css">
 
 </head>
@@ -118,9 +124,125 @@ if(!isset($admin_id)){
       
 
    </div>
+   <br>
+   <h1 class="heading">sales report</h1>
+
+                  <label>Select Year: </label>
+                    <select class="form-control input-sm" id="select_year">
+                      <?php
+                        for($i=2015; $i<=2065; $i++){
+                          $selected = ($i==$year)?'selected':'';
+                          echo "
+                            <option value='".$i."' ".$selected.">".$i."</option>
+                          ";
+                        }
+                      ?>
+                    </select>
+   <div style="width:auto;">
+  <canvas id="myChart" ></canvas>
+</div>
+
+<!-- Chart Data -->
+<?php
+$today = date('Y-m-d');
+$year = date('Y');
+if(isset($_GET['year'])){
+  $year = $_GET['year'];
+}
+
+
+  $months = array();
+  $sales = array();
+  for( $m = 1; $m <= 12; $m++ ) {
+    try{
+      $stmt = $conn->prepare("SELECT * FROM orders  WHERE MONTH(placed_on)=:month AND YEAR(placed_on)=:year");
+      $stmt->execute(['month'=>$m, 'year'=>$year]);
+      $total = 0;
+      foreach($stmt as $srow){
+        $subtotal = $srow['total_price'];
+        $total += $subtotal;    
+      }
+      array_push($sales, round($total, 2));
+    }
+    catch(PDOException $e){
+      echo $e->getMessage();
+    }
+
+    $num = str_pad( $m, 2, 0, STR_PAD_LEFT );
+    $month =  date('M', mktime(0, 0, 0, $m, 1));
+    array_push($months, $month);
+  }
+
+  $months = json_encode($months);
+  $sales = json_encode($sales);
+
+?>
+<!-- End Chart Data -->
+
+
+ 
+<script>
+  // === include 'setup' then 'config' above ===
+  
+  const data = {
+    labels: <?php echo $months; ?>,
+    datasets: [{
+      label: 'sales',
+      data: <?php echo $sales; ?>,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    },
+  };
+
+  var myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
+
+   
+
+
 
 </section>
 
+
+<script>
+$(function(){
+  $('#select_year').change(function(){
+    window.location.href = 'dashboard.php?year='+$(this).val();
+  });
+});
+</script>
 
 
 <script src="../js/admin_script.js"></script>
