@@ -91,20 +91,66 @@ if(isset($_POST['reset_password'])){
    
 <?php include 'components/user_header.php'; ?>
 
+
+
+
+
+
+
 <section class="form-container">
 
+
+
    <form action="" method="post">
-      <h3>update now</h3>
+   <h3>update now</h3>
+   <div class="flex">
+      
       <input type="hidden" name="prev_pass" value="<?= $fetch_profile["password"]; ?>">
       <input type="text" name="name" required placeholder="enter your username" maxlength="30"  class="box" value="<?= $fetch_profile["name"]; ?>">
       <input type="email" name="email" required placeholder="enter your email" maxlength="50"  class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="<?= $fetch_profile["email"]; ?>">
       <input type="text" name="phone" required placeholder="enter your Phone number" maxlength="20"  class="box" value="<?= $fetch_profile["phone"]; ?>">
+
+      <?php
+      $address = $fetch_profile['address'];
+      list($flat, $street, $city, $state, $country, $pin_code) = explode(", ", $address);
+      
+      ?>
+      <div class="inputBox">
+            <span>address line 01 :</span>
+            <input type="text" name="flat" value="<?php echo $flat;?>" placeholder="e.g. flat number" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>address line 02 :</span>
+            <input type="text" name="street" value="<?php echo $street;?>" placeholder="e.g. street name" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>city :</span>
+            <input type="text" name="city" value="<?php echo $city;?>" placeholder="e.g. gelugor" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>state :</span>
+            <input type="text" name="state" value="<?php echo $state;?>" placeholder="e.g. penang" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>country :</span>
+            <input type="text" name="country" value="<?php echo $country;?>" placeholder="e.g. malaysia" class="box" maxlength="50" required>
+         </div>
+         <div class="inputBox">
+            <span>post code :</span>
+            <input type="number" min="0" name="pin_code" value="<?php echo $pin_code;?>" placeholder="e.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
+         </div>
+      
+
+
+
       <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="update now" class="btn" name="submit">
       <input type="submit" value="Change Password" class="delete-btn" name="reset_password">
    </form>
+
+</div>
 
 </section>
 

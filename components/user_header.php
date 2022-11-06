@@ -20,7 +20,7 @@
       <nav class="navbar">
          <a href="home.php">home</a>
          <a href="about.php">about</a>
-         <a href="orders.php">orders</a>
+         
          <a href="shop.php">products</a>
          <a href="contact.php">contact</a>
       </nav>
@@ -34,11 +34,16 @@
             $count_cart_items = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
             $count_cart_items->execute([$user_id]);
             $total_cart_counts = $count_cart_items->rowCount();
+
+            $count_order_items = $conn->prepare("SELECT * FROM `orders` WHERE user_id = ? ");
+            $count_order_items->execute([$user_id]);
+            $total_order_counts = $count_order_items->rowCount();
          ?>
          <div id="menu-btn" class="fas fa-bars"></div>
          <a href="search_page.php"><i class="fas fa-search"></i></a>
          <a href="wishlist.php"><i class="fas fa-heart"></i><span>(<?= $total_wishlist_counts; ?>)</span></a>
          <a href="cart.php"><i class="fas fa-shopping-cart"></i><span>(<?= $total_cart_counts; ?>)</span></a>
+         <a href="orders.php"><i class="fa-solid fa-file-invoice-dollar"></i><span>(<?= $total_order_counts; ?>)</span></a>
          <div id="user-btn" class="fas fa-user"></div>
       </div>
 

@@ -21,7 +21,7 @@ if(isset($_POST['order'])){
    $email = filter_var($email, FILTER_SANITIZE_STRING);
    $method = $_POST['method'];
    $method = filter_var($method, FILTER_SANITIZE_STRING);
-   $address = $_POST['flat'] .', '. $_POST['street'] .', '. $_POST['city'] .', '. $_POST['state'] .', '. $_POST['country'] .' - '. $_POST['pin_code'];
+   $address = $_POST['flat'] .', '. $_POST['street'] .', '. $_POST['city'] .', '. $_POST['state'] .', '. $_POST['country'] .' ， '. $_POST['pin_code'];
    $address = filter_var($address, FILTER_SANITIZE_STRING);
    $total_products = $_POST['total_products'];
    $total_price = $_POST['total_price'];
@@ -106,18 +106,30 @@ if(isset($_POST['order'])){
 
       <h3>place your orders</h3>
 
+<?php
+$select_user = $conn->prepare("SELECT * FROM `users` WHERE id = ? ");
+$select_user->execute([$user_id]);
+$fetch_user = $select_user->fetch(PDO::FETCH_ASSOC);
+
+
+$address = $fetch_user['address'];
+list($flat, $street, $city, $state, $country, $pin_code) = explode(", ", $address);
+
+
+?>
+
       <div class="flex">
          <div class="inputBox">
             <span>your name :</span>
-            <input type="text" name="name" placeholder="enter your name" class="box" maxlength="20" required>
+            <input type="text" name="name" value="<?php echo $fetch_user['name'];?>" placeholder="enter your name" class="box" maxlength="20" required>
          </div>
          <div class="inputBox">
             <span>your number :</span>
-            <input type="number" name="number" placeholder="enter your number" class="box" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
+            <input type="number" name="number" value="<?php echo $fetch_user['phone'];?>" placeholder="enter your number" class="box" min="0" max="9999999999" onkeypress="if(this.value.length == 10) return false;" required>
          </div>
          <div class="inputBox">
             <span>your email :</span>
-            <input type="email" name="email" placeholder="enter your email" class="box" maxlength="50" required>
+            <input type="email" name="email" value="<?php echo $fetch_user['email'];?>" placeholder="enter your email" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>payment method :</span>
@@ -128,27 +140,27 @@ if(isset($_POST['order'])){
          </div>
          <div class="inputBox">
             <span>address line 01 :</span>
-            <input type="text" name="flat" placeholder="e.g. flat number" class="box" maxlength="50" required>
+            <input type="text" name="flat" value="<?php echo $flat;?>" placeholder="e.g. flat number" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>address line 02 :</span>
-            <input type="text" name="street" placeholder="e.g. street name" class="box" maxlength="50" required>
+            <input type="text" name="street" value="<?php echo $street;?>" placeholder="e.g. street name" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>city :</span>
-            <input type="text" name="city" placeholder="e.g. mumbai" class="box" maxlength="50" required>
+            <input type="text" name="city" value="<?php echo $city;?>" placeholder="e.g. gelugor" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>state :</span>
-            <input type="text" name="state" placeholder="e.g. maharashtra" class="box" maxlength="50" required>
+            <input type="text" name="state" value="<?php echo $state;?>" placeholder="e.g. penang" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>country :</span>
-            <input type="text" name="country" placeholder="e.g. India" class="box" maxlength="50" required>
+            <input type="text" name="country" value="<?php echo $country;?>" placeholder="e.g. malaysia" class="box" maxlength="50" required>
          </div>
          <div class="inputBox">
             <span>post code :</span>
-            <input type="number" min="0" name="pin_code" placeholder="e.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
+            <input type="number" min="0" name="pin_code" value="<?php echo $pin_code;?>" placeholder="e.g. 123456" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
          </div>
       </div>
       
