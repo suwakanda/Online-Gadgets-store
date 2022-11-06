@@ -12,7 +12,8 @@ if(isset($_SESSION['user_id'])){
 };
 
 if(isset($_POST['order'])){
-
+   $ref = sprintf("%'012d",mt_rand(0, 999999999999));
+   
    $name = $_POST['name'];
    $name = filter_var($name, FILTER_SANITIZE_STRING);
    $number = $_POST['number'];
@@ -28,11 +29,21 @@ if(isset($_POST['order'])){
 
    $check_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
    $check_cart->execute([$user_id]);
+   
+
 
    if($check_cart->rowCount() > 0){
 
-      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price) VALUES(?,?,?,?,?,?,?,?)");
-      $insert_order->execute([$user_id, $name, $number, $email, $method, $address, $total_products, $total_price]);
+      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id,reference_number, name, number, email, method, address, total_products, total_price) VALUES(?,?,?,?,?,?,?,?,?)");
+      $insert_order->execute([$user_id,$ref, $name, $number, $email, $method, $address, $total_products, $total_price]);
+
+      $insert_parcel = $conn->prepare("INSERT INTO `parcels`(reference_number, status) VALUES(?,0)");
+      $insert_parcel->execute([$ref]);
+      $check_parcels = $conn->prepare("SELECT * FROM `parcels` WHERE reference_number = ?");
+      $check_parcels->execute([$ref]);
+      $fetch_parcels= $check_parcels->fetch(PDO::FETCH_ASSOC);
+      $insert_tracking = $conn->prepare("INSERT INTO `parcel_tracks`(parcel_id, status) VALUES(?,0)");
+      $insert_tracking->execute([$fetch_parcels['id']]);
 
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
       $delete_cart->execute([$user_id]);
@@ -93,6 +104,8 @@ if(isset($_POST['order'])){
          <p> <?= $fetch_cart['name']; ?> <span>(<?= '$'.($fetch_cart['price']).' x '. $fetch_cart['quantity']; ?>)- <?=$fetch_cart['discount'];?>% =(<?= ($fetch_cart['price']-($fetch_cart['price']* $discountRate)) ?>)</span> </p>
          
       <?php
+      
+      
             }
          }else{
             echo '<p class="empty">your cart is empty!</p>';
