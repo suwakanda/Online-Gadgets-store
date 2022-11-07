@@ -75,8 +75,8 @@ if(isset($_POST['submit'])){
 		$row = $select_parcel->fetch(PDO::FETCH_ASSOC);
 		if($select_parcel->rowCount() > 0){
 			
-			$id=$row['id'];
-			$history = $conn->prepare("SELECT * FROM parcel_tracks where parcel_id LIKE '%{$id}%' ORDER BY status ASC ");
+			$parcel_id=$row['id'];
+			$history = $conn->prepare("SELECT * FROM parcel_tracks WHERE parcel_id LIKE '%{$parcel_id}%' ORDER BY status ASC ");
 			$history->execute();
 			
 			if($history->rowCount() > 0){

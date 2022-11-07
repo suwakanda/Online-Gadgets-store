@@ -148,9 +148,6 @@ if(isset($_GET['year'])){
 
 <!-- Chart Data -->
 <?php
-
-
-
   $months = array();
   $sales = array();
   for( $m = 1; $m <= 12; $m++ ) {
