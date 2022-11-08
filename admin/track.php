@@ -27,7 +27,6 @@ if(!isset($admin_id)){
   <!-- Theme style -->
   <link rel="stylesheet" href="../css/admin_style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="assets/bootstrap.min.css">
   
 </head>
 
@@ -47,10 +46,9 @@ if(!isset($admin_id)){
 			<div class="d-flex w-100 px-1 py-2 justify-content-center align-items-center">
 				<label for="">Enter Tracking Number</label>
 				<div class="input-group col-sm-5">
-				<form action="" method="post">
+				<form action="" method="post" style="display: flex;">
                     <input type="search" id="ref_no" name="ref_no" class="form-control form-control-sm" placeholder="Type the tracking number here">
-                    
-                        <button type="submit"  class="btn btn-sm btn-primary btn-gradient-primary " name="submit">
+                        <button type="submit"  class="btn btn-sm btn-primary btn-gradient-primary " name="submit" >
                             <i class="fa fa-search"></i>
                         </button>
                     
@@ -166,3 +164,4 @@ if(isset($_POST['submit'])){
 				
 	  
 </section>
+<script src="../js/admin_script.js"></script>
