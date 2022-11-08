@@ -19,13 +19,7 @@ if(isset($_POST['update_payment'])){
    $message[] = 'payment status updated!';
 }
 
-if(isset($_GET['delete'])){
-   $delete_id = $_GET['delete'];
-   $delete_order = $conn->prepare("DELETE FROM `orders` WHERE id = ?");
-   $delete_order->execute([$delete_id]);
-   header('location:orders.php');
-}
-
+  
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +126,6 @@ if(isset($_GET['delete'])){
                     <td>
                     <a class="btn btn-success btn-sm" href="update_parcel.php?order_id=<?php echo $fetch_orders['id'];?>">Update</a>
                     <a class="btn btn-info btn-sm" href="select_track.php?track_id=<?php echo $fetch_orders['reference_number'];?>">Traking</a>
-                     <a onclick="return confirm('Are you sure To Delete ? The orders information will also be delete!')" class="btn btn-danger btn-sm " href="orders.php?delete=<?= $fetch_orders['id']; ?>">Remove</a>     
                     </td>
                      
                   
