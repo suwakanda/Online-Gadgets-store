@@ -20,10 +20,22 @@ if(isset($_POST['update_payment'])){
 }
 
 if(isset($_GET['delete'])){
-   $delete_id = $_GET['delete'];
-   $delete_order = $conn->prepare("DELETE FROM `orders` WHERE id = ?");
-   $delete_order->execute([$delete_id]);
-   header('location:orders.php');
+   $delete_reference_number = $_GET['delete'];
+   $delete_order = $conn->prepare("DELETE FROM `orders` WHERE reference_number = ?");
+   $delete_order->execute([$delete_reference_number]);
+
+   $select_parcel = $conn->prepare("SELECT * FROM `parcels` WHERE reference_number = ? ");
+   $select_parcel->execute([$delete_reference_number]);
+   $fetch_parcel = $select_parcel->fetch(PDO::FETCH_ASSOC);
+
+   $delete_track = $conn->prepare("DELETE FROM `parcel_tracks` WHERE parcel_id = ?");
+   $delete_track->execute([$fetch_parcel['id']]);
+
+   $delete_track = $conn->prepare("DELETE FROM `parcels` WHERE reference_number = ?");
+   $delete_track->execute([$delete_reference_number]);
+
+
+   header('location:all_orders.php');
 }
 
 ?>
@@ -93,7 +105,7 @@ if(isset($_GET['delete'])){
                     <td>
                     <a class="btn btn-success btn-sm" href="view_order.php?order_id=<?php echo $fetch_orders['id'];?>">View</a>
                     <a class="btn btn-info btn-sm" href="select_track.php?track_id=<?php echo $fetch_orders['reference_number'];?>">Traking</a>
-                     <a onclick="return confirm('Are you sure To Delete ? The orders information will also be delete!')" class="btn btn-danger btn-sm " href="orders.php?delete=<?= $fetch_orders['id']; ?>">Remove</a>     
+                     <a onclick="return confirm('Are you sure To Delete ? The orders information will also be delete!')" class="btn btn-danger btn-sm " href="all_orders.php?delete=<?= $fetch_orders['reference_number']; ?>">Remove</a>     
                     </td>
                      
                   
