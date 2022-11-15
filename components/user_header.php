@@ -11,7 +11,7 @@
    }
 ?>
 
-<header class="header">
+<header class="header" style="background-color: #e3f2fd;">
 
    <section class="flex">
 
