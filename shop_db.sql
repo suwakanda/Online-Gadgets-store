@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2022 at 06:51 AM
+-- Generation Time: Nov 19, 2022 at 06:46 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -88,7 +88,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `reference_number`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `status`, `s_status`) VALUES
-(2, '201406231415', 1, 'superman', '123456786', 'qweqwe@gmail.com', 'cash on delivery', '21, taman desa, jitra, kedah, malaysia,     06000', 'Sony ZV-E10 (3200 x 1) - ', 3200, '2022-10-15 04:12:45', '2', 7),
+(2, '201406231415', 1, 'superman', '123456786', 'qweqwe@gmail.com', 'cash on delivery', '21, taman desa, jitra, kedah, malaysia,     06000', 'Sony ZV-E10 (3200 x 1) - ', 3200, '2022-08-16 04:12:45', '2', 7),
 (4, '983186540795', 1, 'qin', '1234567800', 'qweqwe@gmail.com', 'cash on delivery', '21, taman desa, jitra, kedah, Malaysia,     06000', 'Samsung S22ultra (5000 x 1) - Huawei Watch 3 (2399 x 1) - Huawei MateBook Pro (6789 x 1) - ', 13448, '2022-10-15 03:12:45', '1', 3),
 (7, '485873672352', 1, 'superman', '0123456789', 'qweqwe@gmail.com', 'cash on delivery', '21, taman desa, jitra, kedah, malaysia ， 06000', 'Huawei Watch 3 (2399 x 1) - ', 2159, '2022-11-06 16:43:13', '2', 0),
 (10, '087347487141', 1, 'superman', '0123456789', 'qweqwe@gmail.com', 'cash on delivery', '21, taman desa, jitra, kedah, malaysia ， 06000', 'Apple Macbook Pro 2021 (9000 x 1) - Apple Watch Series 8 (4000 x 1) - ', 10800, '2022-11-06 17:04:29', '2', 1);
@@ -134,17 +134,17 @@ CREATE TABLE `parcel_tracks` (
 --
 
 INSERT INTO `parcel_tracks` (`id`, `parcel_id`, `status`, `date_created`) VALUES
-(2, 3, 1, '2020-11-27 09:55:17'),
-(3, 4, 1, '2020-11-27 10:28:01'),
-(4, 4, 2, '2020-11-27 10:28:10'),
-(5, 4, 3, '2020-11-27 10:28:16'),
-(6, 4, 4, '2020-11-27 11:05:03'),
-(7, 4, 5, '2020-11-27 11:05:17'),
-(8, 4, 7, '2020-11-27 11:05:26'),
-(9, 3, 2, '2020-11-27 11:05:41'),
-(11, 4, 0, '2020-11-26 16:15:46'),
-(13, 3, 3, '2022-11-05 16:48:28'),
-(14, 3, 0, '2022-11-05 17:19:10'),
+(2, 3, 1, '2022-10-16 00:00:00'),
+(3, 4, 1, '2022-08-18 00:00:00'),
+(4, 4, 2, '2022-08-19 10:28:10'),
+(5, 4, 3, '2022-08-20 00:00:00'),
+(6, 4, 4, '2022-08-21 11:05:03'),
+(7, 4, 5, '2022-08-21 11:05:17'),
+(8, 4, 7, '2022-08-22 11:05:26'),
+(9, 3, 2, '2022-10-17 10:45:30'),
+(11, 4, 0, '2022-08-16 12:12:45'),
+(13, 3, 3, '2022-10-18 17:55:45'),
+(14, 3, 0, '2022-10-15 11:12:45'),
 (15, 8, 0, '2022-11-07 00:43:13'),
 (18, 11, 0, '2022-11-07 01:04:29'),
 (19, 11, 1, '2022-11-07 23:55:38');
