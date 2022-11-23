@@ -57,8 +57,66 @@ if(isset($_SESSION['user_id'])){
       <p>your orders : <span><?= $fetch_orders['total_products']; ?></span></p>
       <p>total price : <span>RM<?= $fetch_orders['total_price']; ?>/-</span></p>
       <p>status : <span style="color:<?php if($fetch_orders['status'] == '1'){ echo 'green'; }else{ echo 'orange'; }; ?>"><?php if($fetch_orders['status'] == '1'){ echo 'Done'; }else{ echo 'Pending'; }; ?></span> </p>
+      
+      <?php $select_parcel = $conn->prepare("SELECT * FROM `parcels` WHERE reference_number = ? ");
+		$select_parcel->execute([$fetch_orders['reference_number']]);
+		$row = $select_parcel->fetch(PDO::FETCH_ASSOC);
+		if($select_parcel->rowCount() > 0){
+			
+			$parcel_id=$row['id'];
+			$history = $conn->prepare("SELECT * FROM parcel_tracks WHERE parcel_id LIKE '%{$parcel_id}%' ORDER BY status DESC ");
+			$history->execute();
+         $fetch_history = $history->fetch(PDO::FETCH_ASSOC)
+      ?>
+      
+      <p>tracking parcel: <span><a href="user_select_track.php?track_id=<?php echo $fetch_orders['reference_number'];?>">
+   
+      <?php 
+							switch ($fetch_history['status']) {
+								case '0':
+									echo " Item Accepted by Courier";
+									break;
+								case '1':
+									echo " Collected";
+									break;
+								case '2':
+									echo " Shipped";
+									break;
+								case '3':
+									echo " In-Transit";
+									break;
+								case '4':
+									echo " Arrived At Destination";
+									break;
+								case '5':
+									echo " Out for Delivery";
+									break;
+								case '6':
+									echo " Ready to Pickup";
+									break;
+								case '7':
+									echo " Delivered";
+									break;
+								case '8':
+									echo " Picked-up";
+									break;
+								case '9':
+									echo " Unsuccessfull Delivery Attempt";
+									break;
+								
+								default:
+									echo " Item Accepted by Courier";
+									
+									break;
+							}?>
+   
+   
+   
+   
+   </a></span></p>
    </div>
    <?php
+      }
       }
       }else{
          echo '<p class="empty">no orders placed yet</p>';
